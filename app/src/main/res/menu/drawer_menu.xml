@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="db"
+        android:title="Sashbored"/>
+    <item
+        android:id="event"
+        android:title="Events"/>
+    <item
+        android:id="search"
+        android:title="Search"/>
+    <item
+        android:id="settings"
+        android:title="Settings"/>
+    <item
+        android:id="activities"
+        android:title="Activities"/>
+    <item
+        android:id="logout"
+        android:title="Logout"/>
+</menu>
