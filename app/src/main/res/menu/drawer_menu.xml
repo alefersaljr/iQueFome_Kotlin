@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="db"
-        android:title="Sashbored"/>
+            android:id="@+id/menu_inicial"
+            android:title="Menu Inicial"
+            android:icon="@drawable/icon_dashboard"/>
     <item
-        android:id="event"
-        android:title="Events"/>
+            android:id="@+id/menu_carrinho"
+            android:title="Meu Carrinho"
+            android:icon="@drawable/icon_shopping"/>
     <item
-        android:id="search"
-        android:title="Search"/>
+            android:id="@+id/menu_profile"
+            android:title="Meus Dados"
+            android:icon="@drawable/icon_account"/>
     <item
-        android:id="settings"
-        android:title="Settings"/>
+            android:id="@+id/menu_historico"
+            android:title="Histórico de Pedidos"
+            android:icon="@drawable/icon_history"/>
     <item
-        android:id="activities"
-        android:title="Activities"/>
+            android:id="@+id/menu_share"
+            android:title="Compartilhar"
+            android:icon="@drawable/icon_share"/>
     <item
-        android:id="logout"
-        android:title="Logout"/>
+            android:id="@+id/menu_logout"
+            android:title="Deslogar"
+            android:icon="@drawable/icon_exit"/>
 </menu>
