@@ -22,4 +22,5 @@
     <color name="cinza_medio">#5F798C</color>
     <color name="cinza_escuro1">#203647</color>
     <color name="cinza_escuro2">#2B3740</color>
+    <color name="text_color">#CC2A23</color>
 </resources>
