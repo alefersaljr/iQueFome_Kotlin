@@ -9,6 +9,7 @@ import android.widget.Toast
 class ClienteProfile : AppCompatActivity() {
 
     private lateinit var mToolbar: androidx.appcompat.widget.Toolbar
+    val idBackButton = 16908332
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,7 +17,6 @@ class ClienteProfile : AppCompatActivity() {
 
         mToolbar = findViewById(R.id.toolbar)
         setSupportActionBar(mToolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
@@ -27,13 +27,9 @@ class ClienteProfile : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
+            idBackButton -> onBackPressed()
             R.id.action_menu_profile_page_deslogar -> Toast.makeText(this, "Clicou em deslogar", Toast.LENGTH_SHORT).show()
         }
-        return true
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
         return true
     }
 }

@@ -6,9 +6,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ClienteInicial"
-        android:background="@drawable/app_back3">
+        android:background="@drawable/menu_back">
 
     <include
+            android:id="@+id/toolbar_include"
             layout="@layout/layout_toolbar"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_inicial"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar_include"
+            android:layout_marginTop="20sp">
+
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>

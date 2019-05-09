@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circleImage_Perfil"
+            android:layout_width="80sp"
+            android:layout_height="80sp"
+            android:layout_margin="15sp"
+            android:src="@android:color/darker_gray"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+        <LinearLayout
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight=".7"
+                android:orientation="vertical"
+                android:layout_marginTop="15sp"
+                android:layout_marginBottom="15sp">
+
+            <TextView
+                    android:id="@+id/textView_Nome_Prato"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="NOME DO PRATO"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:maxLines="1"
+                    android:ellipsize="end"/>
+
+            <TextView
+                    android:id="@+id/textView_Restaurante"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="RESTAURANTE"
+                    android:textSize="15sp"
+                    android:textStyle="italic"
+                    android:maxLines="1"
+                    android:ellipsize="end"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight=".25"
+                android:orientation="vertical"
+                android:layout_margin="15sp">
+            <!--android:layout_alignParentRight="true">-->
+
+            <TextView
+                    android:id="@+id/textView_Preco"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="R$ 00,00"
+                    android:textSize="15sp"/>
+
+            <TextView
+                    android:id="@+id/textView_Distancia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="viewEnd"
+                    android:hint="0 m"
+                    android:textSize="15sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
