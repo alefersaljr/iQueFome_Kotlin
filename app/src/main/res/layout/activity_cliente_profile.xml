@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ClienteProfile"
-        android:background="@drawable/note_back">
+        android:background="@drawable/app_background">
 
     <include
             layout="@layout/layout_toolbar"/>
@@ -15,7 +15,7 @@
                     android:paddingLeft="20sp"
                     android:paddingRight="20sp"
                     android:paddingBottom="20sp"
-                    android:layout_marginTop="56sp">
+                    android:layout_marginTop="80sp">
 
 
         <!--<RelativeLayout-->
@@ -85,7 +85,7 @@
                 android:layout_above="@+id/botaoHistoricoPedidos_layout"
                 android:layout_below="@+id/perfil_image"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="15dp"
                 android:orientation="vertical">
 
@@ -258,6 +258,7 @@
                             android:maxLines="1"
                             android:ellipsize="end"/>
 
+
                 </LinearLayout>
 
                 <!--<LinearLayout-->
@@ -414,7 +415,7 @@
                     android:background="@null"
                     android:text="Histórico Pedidos"
                     android:textAllCaps="false"
-                    android:textColor="@color/text_color"/>
+                    android:textColor="#2b1c00"/>
 
         </LinearLayout>
 

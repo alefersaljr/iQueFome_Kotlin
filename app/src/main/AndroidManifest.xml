@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools" package="br.com.alexandre_salgueirinho.iquefome_kotlin">
+          xmlns:tools="http://schemas.android.com/tools"
+          package="br.com.alexandre_salgueirinho.iquefome_kotlin">
 
     <application
             android:allowBackup="true"
@@ -10,6 +11,10 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".ClienteCadastro">
+        </activity>
+        <activity android:name=".ClienteLogin">
+        </activity>
         <activity android:name=".ClienteProfile"/>
         <activity android:name=".ClienteInicial">
             <intent-filter>

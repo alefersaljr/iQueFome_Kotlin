@@ -31,6 +31,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="NOME DO PRATO"
+                    android:textColor="@color/text_color"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:maxLines="1"
@@ -41,6 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="RESTAURANTE"
+                    android:textColor="@color/text_color"
                     android:textSize="15sp"
                     android:textStyle="italic"
                     android:maxLines="1"
@@ -61,6 +63,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="R$ 00,00"
+                    android:textColor="@color/text_color"
                     android:textSize="15sp"/>
 
             <TextView
@@ -69,6 +72,7 @@
                     android:layout_height="wrap_content"
                     android:textAlignment="viewEnd"
                     android:hint="0 m"
+                    android:textColor="@color/text_color"
                     android:textSize="15sp"/>
 
         </LinearLayout>
