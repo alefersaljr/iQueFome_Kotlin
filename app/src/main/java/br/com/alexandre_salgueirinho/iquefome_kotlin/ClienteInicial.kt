@@ -5,9 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_cliente_inicial.*
 
@@ -19,7 +16,7 @@ class ClienteInicial : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cliente_inicial)
 
-        mToolbar = findViewById(R.id.toolbar_include)
+        mToolbar = findViewById(R.id.menu_Toolbar)
 
         setSupportActionBar(mToolbar)
 

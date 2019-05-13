@@ -11,9 +11,9 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".ClienteCadastro">
+        <activity android:name=".ClienteCadastro" android:windowSoftInputMode="stateHidden">
         </activity>
-        <activity android:name=".ClienteLogin">
+        <activity android:name=".ClienteLogin" android:windowSoftInputMode="stateHidden">
         </activity>
         <activity android:name=".ClienteProfile"/>
         <activity android:name=".ClienteInicial">

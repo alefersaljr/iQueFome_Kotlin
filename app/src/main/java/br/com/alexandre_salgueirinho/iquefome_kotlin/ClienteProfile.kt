@@ -16,7 +16,7 @@ class ClienteProfile : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cliente_profile)
 
-        mToolbar = findViewById(R.id.toolbar)
+        mToolbar = findViewById(R.id.profile_Toolbar)
         setSupportActionBar(mToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }

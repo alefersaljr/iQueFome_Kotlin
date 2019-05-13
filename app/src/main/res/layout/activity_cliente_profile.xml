@@ -5,9 +5,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ClienteProfile"
-        android:background="@drawable/app_background">
+        android:background="@drawable/back_default">
+
+    <TextView
+            android:id="@+id/cadastro_TextView_Cadastro"
+            android:layout_width="match_parent"
+            android:layout_height="56sp"
+            android:paddingTop="13sp"
+            android:text="Meu Perfil"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_color"/>
+
+    <View
+            android:layout_width="250sp"
+            android:layout_height="4sp"
+            android:layout_marginTop="5sp"
+            android:layout_centerHorizontal="true"
+            android:background="@color/text_color"
+            android:layout_below="@+id/profile_Toolbar"/>
 
     <include
+            android:id="@+id/profile_Toolbar"
             layout="@layout/layout_toolbar"/>
 
     <RelativeLayout android:layout_width="match_parent"
