@@ -1,11 +1,14 @@
-package br.com.alexandre_salgueirinho.iquefome_kotlin
+package br.com.alexandre_salgueirinho.iquefome_kotlin.view
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import br.com.alexandre_salgueirinho.iquefome_kotlin.R
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_cliente_profile.*
 
 class ClienteProfile : AppCompatActivity() {
 
@@ -19,6 +22,13 @@ class ClienteProfile : AppCompatActivity() {
         mToolbar = findViewById(R.id.profile_Toolbar)
         setSupportActionBar(mToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        profile_Button_Historico.setOnClickListener {
+            Toast.makeText(this, "Em desenvolvimento, aguarde", Toast.LENGTH_SHORT).show()
+        }
+
+        //get user data
+//        FirebaseAuth.getInstance().currentUser.get
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -29,8 +39,11 @@ class ClienteProfile : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             idBackButton -> onBackPressed()
-            R.id.action_menu_profile_page_deslogar -> startActivity ( Intent (this, ClienteLogin::class.java) )
-//            R.id.action_menu_profile_page_deslogar -> Toast.makeText(this, "Clicou em deslogar", Toast.LENGTH_SHORT).show()
+            R.id.action_menu_profile_page_deslogar -> {
+                FirebaseAuth.getInstance().signOut()
+                Log.d("ClienteProfileActivity", "Usuário deslogado")
+                finish()
+            }
         }
         return true
     }

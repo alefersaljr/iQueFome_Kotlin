@@ -3,8 +3,8 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ClienteCadastro"
+        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".view.ClienteCadastro"
         android:background="@drawable/back_default">
 
     <TextView
@@ -38,16 +38,14 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@id/cadastro_TextView_Cadastro"
             android:tooltipText="Clique para escolher uma imagem de perfil"
-            android:src="@drawable/icon_camera2"/>
+            android:src="@drawable/icon_camera2"
+            app:civ_border_width="2sp"/>
 
     <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/cadastro_CircleImage_ProfileImage"
-            android:layout_marginTop="15sp"
-            android:layout_marginStart="30sp"
-            android:layout_marginEnd="30sp"
-            android:layout_marginBottom="15sp">
+            android:layout_marginTop="15sp">
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -187,6 +185,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20sp"
+                    android:layout_marginBottom="15sp"
                     android:text="Já Possui Uma Conta? Faça o Login!"
                     android:textColor="@color/text_color"
                     android:textAlignment="center"/>

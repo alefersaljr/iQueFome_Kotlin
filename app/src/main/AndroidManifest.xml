@@ -11,12 +11,10 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".ClienteCadastro" android:windowSoftInputMode="stateHidden">
-        </activity>
-        <activity android:name=".ClienteLogin" android:windowSoftInputMode="stateHidden">
-        </activity>
-        <activity android:name=".ClienteProfile"/>
-        <activity android:name=".ClienteInicial">
+        <activity android:name=".view.ClienteCadastro" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".view.ClienteLogin" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".view.ClienteProfile"/>
+        <activity android:name=".view.ClienteInicial">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

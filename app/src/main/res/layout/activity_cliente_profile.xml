@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ClienteProfile"
+        tools:context=".view.ClienteProfile"
         android:background="@drawable/back_default">
 
     <TextView
@@ -426,9 +426,9 @@
                 android:orientation="vertical">
 
             <Button
-                    android:id="@+id/botaoHistoricoPedidos"
+                    android:id="@+id/profile_Button_Historico"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="56dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
