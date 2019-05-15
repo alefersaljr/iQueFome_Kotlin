@@ -61,6 +61,7 @@ class ClienteCadastro : AppCompatActivity() {
 
     private fun userRegister() {
         cadastro_Button_Cadastrar.setOnClickListener {
+            val progressBar.vi
             val email = cadastro_EditText_Email.text.toString()
             val password = cadastro_EditText_Password.text.toString()
 

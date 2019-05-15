@@ -4,15 +4,20 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import br.com.alexandre_salgueirinho.iquefome_kotlin.R
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_cliente_login.*
+import kotlinx.android.synthetic.main.popup_recuperar.*
+import kotlinx.android.synthetic.main.popup_recuperar.view.*
 
 class ClienteLogin : AppCompatActivity() {
 
     private lateinit var mToolbar: androidx.appcompat.widget.Toolbar
     var mAuth = FirebaseAuth.getInstance()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,25 +37,61 @@ class ClienteLogin : AppCompatActivity() {
             finish()
         }
 
+//        login_TextView_Recuperar.setOnClickListener {
+//            var email = login_EditText_Email.text.toString()
+//            if (!email.isEmpty()) {
+//                mAuth.sendPasswordResetEmail(email)
+//                    .addOnSuccessListener {
+//                        Toast.makeText(
+//                            this,
+//                            "Um email de recuperação de senha foi enviado para você",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//                    }.addOnFailureListener {
+//                        Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
+//                    }
+//            } else {
+//                Toast.makeText(
+//                    this,
+//                    "Informe um email para que lhe seja enviado a recuperação de senha",
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//            }
+//        }
+
         login_TextView_Recuperar.setOnClickListener {
-            var email = login_EditText_Email.text.toString()
-            if (!email.isEmpty()) {
-                mAuth.sendPasswordResetEmail(email)
-                    .addOnSuccessListener {
-                        Toast.makeText(
-                            this,
-                            "Um email de recuperação de senha foi enviado para você",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }.addOnFailureListener {
-                        Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
-                    }
-            } else {
-                Toast.makeText(
-                    this,
-                    "Informe um email para que lhe seja enviado a recuperação de senha",
-                    Toast.LENGTH_SHORT
-                ).show()
+            val mDialog = LayoutInflater.from(this).inflate(R.layout.popup_recuperar, null)
+            val mBuilder = AlertDialog.Builder(this).setView(mDialog)
+            val mAlertDialog = mBuilder.show()
+
+            mDialog.popup_Button_Enviar.setOnClickListener {
+                val email = popup_EditText_Email.text.toString()
+                if (!email.isEmpty()) {
+                    Log.d("Popup", "Email não vazio")
+                    mAuth.sendPasswordResetEmail(email)
+                        .addOnSuccessListener {
+                            Log.d("Popup", "sucesso")
+//                            Toast.makeText(
+//                                this,
+//                                "Um email de recuperação de senha foi enviado para você",
+//                                Toast.LENGTH_SHORT
+//                            ).show()
+                        }.addOnFailureListener {
+                            Log.d("Popup", "falha")
+//                            Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
+                        }
+                } else {
+                            Log.d("Popup", "Erro")
+//                    Toast.makeText(
+//                        this,
+//                        "Informe um email para que lhe seja enviado a recuperação de senha",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+                }
+            }
+
+            mDialog.popup_Button_Close.setOnClickListener {
+                mAlertDialog.dismiss()
             }
         }
     }
