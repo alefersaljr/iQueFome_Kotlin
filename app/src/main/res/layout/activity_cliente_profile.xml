@@ -2,8 +2,8 @@
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent" android:layout_height="match_parent"
         tools:context=".view.ClienteProfile"
         android:background="@drawable/back_default">
 
@@ -37,35 +37,15 @@
                     android:paddingBottom="20sp"
                     android:layout_marginTop="80sp">
 
-
-        <!--<RelativeLayout-->
-        <!--android:id="@+id/Logo"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_weight="1">-->
-
-        <!--<TextView-->
-        <!--android:id="@+id/textTituloiQueFome"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:fontFamily="sans-serif"-->
-        <!--android:hint="iQue Fome"-->
-        <!--android:textAlignment="center"-->
-        <!--android:textColorHint="@color/text_color"-->
-        <!--android:textSize="50dp"-->
-        <!--android:textStyle="italic" />-->
-
-        <!--</RelativeLayout>-->
-
         <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/perfil_image"
                 android:layout_width="50sp"
                 android:layout_height="50sp"
                 android:src="@drawable/usericon100"
                 android:layout_marginTop="5sp"
-                android:layout_marginLeft="10sp"/>
+                android:layout_marginLeft="10sp"
+                app:civ_border_width="2sp"
+                app:civ_border_color="@color/text_color"/>
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -81,9 +61,10 @@
                     android:layout_marginLeft="100sp"
                     android:fontFamily="sans-serif"
                     android:text="Sobrenome"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:textColor="@color/text_color"
                     android:textSize="18sp"/>
-            <!--android:layout_margin="15dp"-->
 
             <TextView
                     android:id="@+id/textViewNome"
@@ -92,9 +73,10 @@
                     android:layout_marginLeft="110sp"
                     android:fontFamily="sans-serif"
                     android:text="Nome"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:textColor="@color/text_color"
                     android:textSize="18sp"/>
-            <!--android:layout_margin="15dp"-->
 
         </LinearLayout>
 
@@ -122,43 +104,10 @@
                         android:layout_alignParentLeft="true">
 
                     <TextView
-                            android:id="@+id/textViewTelefone"
-                            android:layout_width="0sp"
-                            android:layout_height="25sp"
-                            android:layout_weight=".12"
-                            android:layout_marginTop="18sp"
-                            android:fontFamily="sans-serif"
-                            android:text="Telefone:"
-                            android:textColor="@color/text_color"
-                            android:textSize="18sp"/>
-
-                    <TextView
-                            android:id="@+id/textViewTelefone_Data"
-                            android:layout_width="0sp"
-                            android:layout_height="25sp"
-                            android:layout_weight=".45"
-                            android:layout_marginTop="18sp"
-                            android:layout_marginLeft="5sp"
-                            android:fontFamily="sans-serif"
-                            android:text="Número"
-                            android:textColor="@color/text_color"
-                            android:textSize="16sp"
-                            android:maxLines="1"
-                            android:ellipsize="end"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_alignParentLeft="true">
-
-                    <TextView
                             android:id="@+id/textViewCelular"
                             android:layout_width="0sp"
                             android:layout_height="25sp"
-                            android:layout_weight=".09"
+                            android:layout_weight=".1"
                             android:layout_marginTop="28sp"
                             android:fontFamily="sans-serif"
                             android:text="Celular:"
@@ -191,7 +140,7 @@
                             android:id="@+id/textViewEmail"
                             android:layout_width="0sp"
                             android:layout_height="25sp"
-                            android:layout_weight=".07"
+                            android:layout_weight=".08"
                             android:layout_marginTop="26sp"
                             android:fontFamily="sans-serif"
                             android:text="Email:"
@@ -219,43 +168,10 @@
                         android:layout_alignParentLeft="true">
 
                     <TextView
-                            android:id="@+id/textViewTipoUsuario"
-                            android:layout_width="0sp"
-                            android:layout_height="25sp"
-                            android:layout_weight=".25"
-                            android:layout_marginTop="26sp"
-                            android:fontFamily="sans-serif"
-                            android:text="Tipo de Usuário:"
-                            android:textColor="@color/text_color"
-                            android:textSize="18sp"/>
-
-                    <TextView
-                            android:id="@+id/textViewTipoUsuario_Data"
-                            android:layout_width="0sp"
-                            android:layout_height="25sp"
-                            android:layout_weight=".45"
-                            android:layout_marginTop="26sp"
-                            android:layout_marginLeft="5sp"
-                            android:fontFamily="sans-serif"
-                            android:text="Tipo"
-                            android:textColor="@color/text_color"
-                            android:textSize="16sp"
-                            android:maxLines="1"
-                            android:ellipsize="end"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_alignParentLeft="true">
-
-                    <TextView
                             android:id="@+id/textViewIndicado"
                             android:layout_width="0sp"
                             android:layout_height="25sp"
-                            android:layout_weight=".19"
+                            android:layout_weight=".2"
                             android:layout_marginTop="26sp"
                             android:fontFamily="sans-serif"
                             android:text="Indicado Por:"
@@ -278,139 +194,7 @@
                             android:maxLines="1"
                             android:ellipsize="end"/>
 
-
                 </LinearLayout>
-
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:layout_alignParentLeft="true">-->
-
-                <!--<TextView-->
-                <!--android:id="@+id/textViewCep"-->
-                <!--android:layout_width="0sp"-->
-                <!--android:layout_height="25sp"-->
-                <!--android:layout_weight=".06"-->
-                <!--android:layout_marginTop="32sp"-->
-                <!--android:fontFamily="sans-serif"-->
-                <!--android:text="CEP:"-->
-                <!--android:textColor="@color/text_color"-->
-                <!--android:textSize="18sp"-->
-                <!--android:visibility="visible"/>-->
-
-                <!--<TextView-->
-                <!--android:id="@+id/textViewCep_Data"-->
-                <!--android:layout_width="0sp"-->
-                <!--android:layout_height="25sp"-->
-                <!--android:layout_weight=".45"-->
-                <!--android:layout_marginTop="32sp"-->
-                <!--android:layout_marginLeft="5sp"-->
-                <!--android:fontFamily="sans-serif"-->
-                <!--android:text="Número Celular"-->
-                <!--android:textColor="@color/text_color"-->
-                <!--android:textSize="16sp"-->
-                <!--android:visibility="visible"/>-->
-
-                <!--</LinearLayout>-->
-
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="horizontal">-->
-
-                <!--<TextView-->
-                <!--android:id="@+id/textViewCidade"-->
-                <!--android:layout_width="0sp"-->
-                <!--android:layout_height="25sp"-->
-                <!--android:layout_weight=".09"-->
-                <!--android:layout_marginTop="32sp"-->
-                <!--android:fontFamily="sans-serif"-->
-                <!--android:text="Cidade:"-->
-                <!--android:textColor="@color/text_color"-->
-                <!--android:textSize="18sp"-->
-                <!--android:visibility="visible"/>-->
-
-                <!--<TextView-->
-                <!--android:id="@+id/textViewCidade_Data"-->
-                <!--android:layout_width="0sp"-->
-                <!--android:layout_height="25sp"-->
-                <!--android:layout_weight=".45"-->
-                <!--android:layout_marginTop="32sp"-->
-                <!--android:layout_marginLeft="5sp"-->
-                <!--android:fontFamily="sans-serif"-->
-                <!--android:text="Cidade"-->
-                <!--android:textColor="@color/text_color"-->
-                <!--android:textSize="16sp"-->
-                <!--android:visibility="visible"/>-->
-
-                <!--</LinearLayout>-->
-
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:layout_alignParentLeft="true">-->
-
-                <!--<TextView-->
-                <!--android:id="@+id/textViewRua"-->
-                <!--android:layout_width="0sp"-->
-                <!--android:layout_height="25sp"-->
-                <!--android:layout_weight=".05"-->
-                <!--android:layout_marginTop="32sp"-->
-                <!--android:fontFamily="sans-serif"-->
-                <!--android:text="Rua:"-->
-                <!--android:textColor="@color/text_color"-->
-                <!--android:textSize="18sp"-->
-                <!--android:visibility="visible"/>-->
-
-                <!--<TextView-->
-                <!--android:id="@+id/textViewRua_Data"-->
-                <!--android:layout_width="0sp"-->
-                <!--android:layout_height="25sp"-->
-                <!--android:layout_weight=".45"-->
-                <!--android:layout_marginTop="32sp"-->
-                <!--android:layout_marginLeft="5sp"-->
-                <!--android:fontFamily="sans-serif"-->
-                <!--android:text="Rua"-->
-                <!--android:textColor="@color/text_color"-->
-                <!--android:textSize="16sp"-->
-                <!--android:visibility="visible"/>-->
-
-                <!--</LinearLayout>-->
-
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:layout_alignParentLeft="true">-->
-
-                <!--<TextView-->
-                <!--android:id="@+id/textViewNumero"-->
-                <!--android:layout_width="0sp"-->
-                <!--android:layout_height="25sp"-->
-                <!--android:layout_weight=".3"-->
-                <!--android:layout_marginTop="32sp"-->
-                <!--android:fontFamily="sans-serif"-->
-                <!--android:text="N°/Complemento:"-->
-                <!--android:textColor="@color/text_color"-->
-                <!--android:textSize="18sp"-->
-                <!--android:visibility="visible"/>-->
-
-                <!--<TextView-->
-                <!--android:id="@+id/textViewNumero_Data"-->
-                <!--android:layout_width="0sp"-->
-                <!--android:layout_height="25sp"-->
-                <!--android:layout_weight=".45"-->
-                <!--android:layout_marginTop="32sp"-->
-                <!--android:layout_marginLeft="5sp"-->
-                <!--android:fontFamily="sans-serif"-->
-                <!--android:text="Complemento"-->
-                <!--android:textColor="@color/text_color"-->
-                <!--android:textSize="16sp"-->
-                <!--android:visibility="visible"/>-->
-
-                <!--</LinearLayout>-->
 
             </LinearLayout>
 
@@ -432,7 +216,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
-                    android:background="@null"
+                    android:background="@drawable/round_button"
                     android:text="Histórico Pedidos"
                     android:textAllCaps="false"
                     android:textColor="#2b1c00"/>

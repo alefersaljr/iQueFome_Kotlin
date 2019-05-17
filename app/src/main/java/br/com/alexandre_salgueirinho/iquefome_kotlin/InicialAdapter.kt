@@ -36,6 +36,4 @@ class  InicialAdapter: RecyclerView.Adapter<CustomViewModel>() {
     }
 }
 
-class CustomViewModel(val view: View): RecyclerView.ViewHolder(view){
-
-}
+class CustomViewModel(val view: View): RecyclerView.ViewHolder(view){  }

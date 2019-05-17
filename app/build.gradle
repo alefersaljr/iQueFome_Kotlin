@@ -51,9 +51,10 @@ dependencies {
     annotationProcessor "android.arch.persistence.room:compiler:$room_version"
     kapt "android.arch.persistence.room:compiler:$room_version"
 
+    implementation 'com.xwray:groupie:2.3.0'
 
     implementation 'de.hdodenhof:circleimageview:2.2.0'
-    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
     //Teste
     testImplementation 'junit:junit:4.12'

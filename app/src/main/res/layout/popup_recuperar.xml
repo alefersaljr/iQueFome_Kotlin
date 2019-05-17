@@ -10,7 +10,8 @@
             android:id="@+id/cabecalho"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_margin="5sp">
 
 
         <TextView
@@ -46,7 +47,8 @@
             android:layout_height="wrap_content"
             android:paddingBottom="30sp"
             android:orientation="vertical"
-            android:layout_centerVertical="true">
+            android:layout_centerVertical="true"
+            android:layout_margin="5sp">
 
         <TextView
                 android:id="@+id/popup_TextView_ParaRecuperar"
@@ -86,12 +88,16 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="40sp">
+            android:paddingBottom="40sp"
+            android:orientation="vertical">
 
         <Button
                 android:id="@+id/popup_Button_Enviar"
+                android:layout_below="@+id/Linear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:layout_centerHorizontal="true"
                 android:background="@drawable/round_button"
                 android:text="ENVIAR"
                 android:textColor="@color/text_color"
@@ -99,18 +105,12 @@
 
     </LinearLayout>
 
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="horizontal">-->
-
-    <!--<Button-->
-    <!--android:layout_width="0sp"-->
-    <!--android:layout_height="40sp"-->
-    <!--android:layout_weight=".1"-->
-    <!--android:layout_gravity="center"-->
-    <!--android:text="ENVIAR"/>-->
-
-    <!--</LinearLayout>-->
+    <ProgressBar
+            android:id="@+id/recuperar_ProgressBar"
+            android:layout_width="70sp"
+            android:layout_height="70sp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+        android:visibility="gone"/>
 
 </RelativeLayout>

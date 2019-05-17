@@ -12,7 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="56sp"
             android:paddingTop="13sp"
-            android:text="LOGIN"
+            android:text="@string/login_ToolBar_Login"
             android:textAlignment="center"
             android:textSize="30sp"
             android:textStyle="bold"
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_centerVertical="true">
-            <!--android:layout_marginTop="120sp">-->
+        <!--android:layout_marginTop="120sp">-->
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -51,7 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Email"
+                    android:hint="@string/login_EditText_Email"
                     android:textColor="@color/text_color"
                     android:inputType="textEmailAddress"/>
 
@@ -70,7 +70,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Senha"
+                    android:hint="@string/login_EditText_Senha"
                     android:textColor="@color/text_color"
                     android:inputType="textPassword"/>
 
@@ -93,29 +93,37 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30sp"
                 android:layout_marginRight="30sp"
-                android:text="LOGIN"
+                android:text="@string/login_Button_Login"
                 android:textStyle="bold"
                 android:textColor="@color/text_color"
-                android:background="@null" />
+                android:background="@drawable/round_button"/>
 
         <TextView
                 android:id="@+id/login_TextView_Recuperar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20sp"
-                android:text="Esqueceu Sua Senha? Recupere-a Aqui!"
+                android:text="@string/login_TextView_RecuperarSenha"
                 android:textColor="@color/text_color"
                 android:textAlignment="center"/>
 
         <TextView
-                android:id="@+id/login_TextView_Registre"
+                android:id="@+id/login_TextView_Cadastrese"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20sp"
-                android:text="Não Possui Uma Conta? Registre-se Aqui!"
+                android:text="@string/login_TextView_Cadastro"
                 android:textColor="@color/text_color"
                 android:textAlignment="center"/>
     </LinearLayout>
+
+    <ProgressBar
+            android:id="@+id/login_ProgressBar"
+            android:layout_width="70sp"
+            android:layout_height="70sp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone"/>
 
 
 </RelativeLayout>

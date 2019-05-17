@@ -3,13 +3,23 @@ package br.com.alexandre_salgueirinho.iquefome_kotlin.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import androidx.recyclerview.widget.LinearLayoutManager
-import br.com.alexandre_salgueirinho.iquefome_kotlin.InicialAdapter
+import android.widget.Toast
 import br.com.alexandre_salgueirinho.iquefome_kotlin.R
+import br.com.alexandre_salgueirinho.iquefome_kotlin.model.Pratos
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.squareup.picasso.Picasso
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.Item
+import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_cliente_inicial.*
+import kotlinx.android.synthetic.main.item_prato.view.*
 
 class ClienteInicial : AppCompatActivity() {
 
@@ -23,8 +33,42 @@ class ClienteInicial : AppCompatActivity() {
 
         setSupportActionBar(mToolbar)
 
-        recyclerView_inicial.layoutManager = LinearLayoutManager(this)
-        recyclerView_inicial.adapter = InicialAdapter()
+//        inicial_RecyclerView.layoutManager = LinearLayoutManager(this)
+//        inicial_RecyclerView.adapter = InicialAdapter()
+
+//        val adapter = GroupAdapter<ViewHolder>()
+//        adapter.add(PratoItem())
+//        inicial_RecyclerView.adapter = adapter
+
+        carregaPratos()
+    }
+
+    private fun carregaPratos() {
+        val ref = FirebaseDatabase.getInstance().getReference("/pratos")
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+
+            override fun onDataChange(p0: DataSnapshot) {
+                val adapter = GroupAdapter<ViewHolder>()
+
+                p0.children.forEach{
+                    Log.d("ClienteInicial", it.toString())
+                    val teste = it.getValue(Pratos::class.java)
+
+                    if(teste != null){
+                        adapter.add(PratoItem(teste))
+                    }
+                }
+
+                adapter.setOnItemClickListener { item, view ->
+
+                    Toast.makeText(this@ClienteInicial, "Em desenvolvimento, aguarde", Toast.LENGTH_SHORT).show()
+                }
+
+                inicial_RecyclerView.adapter = adapter
+            }
+
+            override fun onCancelled(p0: DatabaseError) {  }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -35,10 +79,38 @@ class ClienteInicial : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.action_menu_profile -> {
-                if(FirebaseAuth.getInstance().currentUser != null) startActivity(Intent(this, ClienteProfile:: class.java))
-                else if(FirebaseAuth.getInstance().currentUser == null) startActivity(Intent(this, ClienteLogin:: class.java))
+                if (FirebaseAuth.getInstance().currentUser != null) startActivity(
+                    Intent(
+                        this,
+                        ClienteProfile::class.java
+                    )
+                )
+                else if (FirebaseAuth.getInstance().currentUser == null) startActivity(
+                    Intent(
+                        this,
+                        ClienteLogin::class.java
+                    )
+                )
             }
         }
         return true
     }
 }
+
+//class PratoItem: Item<ViewHolder>() {
+class PratoItem (val prato:Pratos): Item<ViewHolder>() {
+
+    override fun bind(viewHolder: ViewHolder, position: Int) {
+//        viewHolder.itemView.textView_Nome_Prato.text = prato.pratoNome
+//        viewHolder.itemView.textView_Restaurante.text = prato.pratoRestaurante
+//        viewHolder.itemView.textView_Preco.text = prato.pratoPreco
+//
+//        Picasso.get().load(prato.pratoUrlFoto).into(viewHolder.itemView.circleImage_Perfil)
+    }
+
+    override fun getLayout(): Int {
+        return R.layout.item_prato
+    }
+}
+
+

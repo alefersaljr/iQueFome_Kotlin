@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+        android:id="@+id/item_Prato"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content" xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/circleImage_Perfil"
             android:layout_width="80sp"
             android:layout_height="80sp"
             android:layout_margin="15sp"
-            android:src="@android:color/darker_gray"/>
+            android:src="@drawable/ic_restaurant_menu_black_24dp"
+            app:civ_border_width="2sp"
+            app:civ_border_color="@color/text_color"/>
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -60,20 +63,37 @@
 
             <TextView
                     android:id="@+id/textView_Preco"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="bottom|end"
                     android:hint="R$ 00,00"
                     android:textColor="@color/text_color"
-                    android:textSize="15sp"/>
+                    android:textSize="15sp"
+                    android:maxLines="1"
+                    android:ellipsize="end"/>
 
-            <TextView
-                    android:id="@+id/textView_Distancia"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="viewEnd"
-                    android:hint="0 m"
-                    android:textColor="@color/text_color"
-                    android:textSize="15sp"/>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="bottom|end"
+                    android:orientation="horizontal">
+
+                <ImageView
+                        android:layout_width="18sp"
+                        android:layout_height="23sp"
+                        android:src="@drawable/ic_location_on_black_24dp"/>
+
+                <TextView
+                        android:id="@+id/textView_Distancia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="24sp"
+                        android:gravity="bottom|end"
+                        android:hint="0 m"
+                        android:textColor="@color/text_color"
+                        android:textSize="15sp"
+                        android:maxLines="1"
+                        android:ellipsize="end"/>
+            </LinearLayout>
 
         </LinearLayout>
 
