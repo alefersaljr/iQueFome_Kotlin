@@ -38,7 +38,7 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@id/cadastro_TextView_Cadastro"
             android:tooltipText="@string/cadastro_CircleImage_EscolhaImagem"
-            android:src="@drawable/icon_camera2"
+            android:src="@drawable/icon_camera"
             app:civ_border_width="2sp"/>
 
     <ScrollView
@@ -205,12 +205,20 @@
 
     </ScrollView>
 
-    <ProgressBar
+    <RelativeLayout
             android:id="@+id/cadastro_ProgressBar"
-            android:layout_width="70sp"
-            android:layout_height="70sp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:visibility="gone"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#77b8a076"
+            android:visibility="gone">
+
+
+        <ProgressBar
+                android:layout_width="70sp"
+                android:layout_height="70sp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
 
 </RelativeLayout>

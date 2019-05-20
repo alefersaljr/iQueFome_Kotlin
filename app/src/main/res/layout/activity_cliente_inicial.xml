@@ -6,9 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".view.ClienteInicial"
-        android:background="@drawable/back_default"
-
->
+        android:background="@drawable/back_default">
 
     <TextView
             android:id="@+id/cadastro_TextView_Cadastro"
@@ -39,6 +37,21 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/menu_Toolbar"
-            android:layout_marginTop="20sp" />
+            android:layout_marginTop="20sp"/>
+
+    <RelativeLayout
+            android:id="@+id/inicial_ProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#77b8a076">
+
+
+        <ProgressBar
+                android:layout_width="70sp"
+                android:layout_height="70sp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -9,9 +9,10 @@ import kotlinx.android.synthetic.main.item_prato.view.*
 class PratoItem (val prato:Pratos): Item<ViewHolder>() {
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
+        val precoPrato = "R\$ " + prato.pratoPreco
         viewHolder.itemView.textView_Nome_Prato.text = prato.pratoNome
         viewHolder.itemView.textView_Restaurante.text = prato.pratoRestaurante
-        viewHolder.itemView.textView_Preco.text = prato.pratoPreco
+        viewHolder.itemView.textView_Preco.text = precoPrato
 
         Picasso.get().load(prato.pratoUrlFoto).into(viewHolder.itemView.circleImage_Perfil)
     }

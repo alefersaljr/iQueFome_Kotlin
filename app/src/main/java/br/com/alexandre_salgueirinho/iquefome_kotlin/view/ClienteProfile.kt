@@ -2,9 +2,11 @@ package br.com.alexandre_salgueirinho.iquefome_kotlin.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import br.com.alexandre_salgueirinho.iquefome_kotlin.R
 import br.com.alexandre_salgueirinho.iquefome_kotlin.model.Usuário
@@ -37,6 +39,8 @@ class ClienteProfile : AppCompatActivity() {
     }
 
     private fun getUsers() {
+        profile_ProgressBar.visibility = View.VISIBLE
+
         val userID = FirebaseAuth.getInstance().currentUser?.uid
         val ref = FirebaseDatabase.getInstance().getReference("/users/$userID")
 
@@ -46,14 +50,30 @@ class ClienteProfile : AppCompatActivity() {
             override fun onDataChange(p0: DataSnapshot) {
                 val user = p0.getValue(Usuário::class.java)
 
-                if (user != null) {
-                    textViewNome.text = user.userNome
-                    textViewSobrenome.setText(user.userSobrenome)
-                    textViewCelular_Data.setText(user.userCelular)
-                    textViewEmail_Data.setText(user.userEmail)
-                    textViewIndicado_Data.setText(user.userIndicado)
+                try {
+                    if (user != null) {
+                        textViewNome.text = user.userNome
+                        textViewSobrenome.setText(user.userSobrenome)
+                        textViewCelular_Data.setText(user.userCelular)
+                        textViewEmail_Data.setText(user.userEmail)
+                        textViewIndicado_Data.setText(user.userIndicado)
 
-                    Picasso.get().load(user.userUrlImagemPerfil).into(perfil_image)
+                        Picasso.get().load(user.userUrlImagemPerfil).into(perfil_image)
+
+                        val handler = Handler()
+                        handler.postDelayed(object : Runnable {
+                            override fun run() {
+                                profile_ProgressBar.visibility = View.GONE
+                            }
+                        }, 2000)
+
+                    } else {
+                        Toast.makeText(this@ClienteProfile, "Por favor, realize o login", Toast.LENGTH_SHORT).show()
+                        profile_ProgressBar.visibility = View.GONE
+                    }
+                } catch (ex: Exception) {
+                    Toast.makeText(this@ClienteProfile, "${ex.message}", Toast.LENGTH_SHORT).show()
+                    profile_ProgressBar.visibility = View.GONE
                 }
             }
         })

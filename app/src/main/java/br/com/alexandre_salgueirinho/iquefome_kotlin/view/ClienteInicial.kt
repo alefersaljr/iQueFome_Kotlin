@@ -3,11 +3,13 @@ package br.com.alexandre_salgueirinho.iquefome_kotlin.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
+import android.view.View
 import br.com.alexandre_salgueirinho.iquefome_kotlin.R
+//import br.com.alexandre_salgueirinho.iquefome_kotlin.model.PratoItem
 import br.com.alexandre_salgueirinho.iquefome_kotlin.model.Pratos
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -30,17 +32,20 @@ class ClienteInicial : AppCompatActivity() {
         setContentView(R.layout.activity_cliente_inicial)
 
         mToolbar = findViewById(R.id.menu_Toolbar)
-
         setSupportActionBar(mToolbar)
 
-//        inicial_RecyclerView.layoutManager = LinearLayoutManager(this)
-//        inicial_RecyclerView.adapter = InicialAdapter()
-
-//        val adapter = GroupAdapter<ViewHolder>()
-//        adapter.add(PratoItem())
-//        inicial_RecyclerView.adapter = adapter
-
         carregaPratos()
+
+        val handler = Handler()
+        handler.postDelayed(object : Runnable {
+            override fun run() {
+                inicial_ProgressBar.visibility = View.GONE
+            }
+        }, 4000)
+    }
+
+    companion object{
+        val PRATO_KEY = "PRATO_KEY"
     }
 
     private fun carregaPratos() {
@@ -50,24 +55,30 @@ class ClienteInicial : AppCompatActivity() {
             override fun onDataChange(p0: DataSnapshot) {
                 val adapter = GroupAdapter<ViewHolder>()
 
-                p0.children.forEach{
+                p0.children.forEach {
                     Log.d("ClienteInicial", it.toString())
                     val teste = it.getValue(Pratos::class.java)
 
-                    if(teste != null){
+                    if (teste != null) {
                         adapter.add(PratoItem(teste))
                     }
                 }
 
                 adapter.setOnItemClickListener { item, view ->
 
-                    Toast.makeText(this@ClienteInicial, "Em desenvolvimento, aguarde", Toast.LENGTH_SHORT).show()
-                }
+                    inicial_ProgressBar.visibility = View.VISIBLE
 
+                    val pratoI = item as PratoItem
+
+                    val intent = Intent(view.context, ClientePratoComposicao::class.java)
+                    intent.putExtra(PRATO_KEY, pratoI.prato)
+
+                    inicial_ProgressBar.visibility = View.GONE
+                    startActivity(intent)
+                }
                 inicial_RecyclerView.adapter = adapter
             }
-
-            override fun onCancelled(p0: DatabaseError) {  }
+            override fun onCancelled(p0: DatabaseError) {}
         })
     }
 
@@ -97,15 +108,15 @@ class ClienteInicial : AppCompatActivity() {
     }
 }
 
-//class PratoItem: Item<ViewHolder>() {
 class PratoItem (val prato:Pratos): Item<ViewHolder>() {
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
-//        viewHolder.itemView.textView_Nome_Prato.text = prato.pratoNome
-//        viewHolder.itemView.textView_Restaurante.text = prato.pratoRestaurante
-//        viewHolder.itemView.textView_Preco.text = prato.pratoPreco
-//
-//        Picasso.get().load(prato.pratoUrlFoto).into(viewHolder.itemView.circleImage_Perfil)
+        val precoPrato = "R\$ " + prato.pratoPreco
+        viewHolder.itemView.textView_Nome_Prato.text = prato.pratoNome
+        viewHolder.itemView.textView_Restaurante.text = prato.pratoRestaurante
+        viewHolder.itemView.textView_Preco.text = precoPrato
+
+        Picasso.get().load(prato.pratoUrlFoto).into(viewHolder.itemView.circleImage_Perfil)
     }
 
     override fun getLayout(): Int {

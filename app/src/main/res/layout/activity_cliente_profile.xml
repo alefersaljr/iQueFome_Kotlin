@@ -41,7 +41,7 @@
                 android:id="@+id/perfil_image"
                 android:layout_width="50sp"
                 android:layout_height="50sp"
-                android:src="@drawable/usericon100"
+                android:src="@drawable/icon_user_mask"
                 android:layout_marginTop="5sp"
                 android:layout_marginLeft="10sp"
                 app:civ_border_width="2sp"
@@ -58,7 +58,7 @@
                     android:id="@+id/textViewSobrenome"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="100sp"
+                    android:layout_marginStart="100sp"
                     android:fontFamily="sans-serif"
                     android:text="Sobrenome"
                     android:maxLines="1"
@@ -70,7 +70,7 @@
                     android:id="@+id/textViewNome"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="110sp"
+                    android:layout_marginStart="110sp"
                     android:fontFamily="sans-serif"
                     android:text="Nome"
                     android:maxLines="1"
@@ -101,7 +101,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_alignParentLeft="true">
+                        android:layout_alignParentStart="true">
 
                     <TextView
                             android:id="@+id/textViewCelular"
@@ -120,7 +120,7 @@
                             android:layout_height="25sp"
                             android:layout_weight=".45"
                             android:layout_marginTop="28sp"
-                            android:layout_marginLeft="5sp"
+                            android:layout_marginStart="5sp"
                             android:fontFamily="sans-serif"
                             android:text="Número Celular"
                             android:textColor="@color/text_color"
@@ -134,7 +134,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_alignParentLeft="true">
+                        android:layout_alignParentStart="true">
 
                     <TextView
                             android:id="@+id/textViewEmail"
@@ -153,7 +153,7 @@
                             android:layout_height="25sp"
                             android:layout_weight=".45"
                             android:layout_marginTop="26sp"
-                            android:layout_marginLeft="5sp"
+                            android:layout_marginStart="5sp"
                             android:fontFamily="sans-serif"
                             android:text="Email"
                             android:textColor="@color/text_color"
@@ -165,7 +165,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_alignParentLeft="true">
+                        android:layout_alignParentStart="true">
 
                     <TextView
                             android:id="@+id/textViewIndicado"
@@ -185,7 +185,7 @@
                             android:layout_height="25sp"
                             android:layout_weight=".45"
                             android:layout_marginTop="26sp"
-                            android:layout_marginLeft="5sp"
+                            android:layout_marginStart="5sp"
                             android:fontFamily="sans-serif"
                             android:text="Número Celular"
                             android:textColor="@color/text_color"
@@ -222,6 +222,22 @@
                     android:textColor="#2b1c00"/>
 
         </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:id="@+id/profile_ProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#77b8a076"
+            android:visibility="gone">
+
+
+        <ProgressBar
+                android:layout_width="70sp"
+                android:layout_height="70sp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"/>
 
     </RelativeLayout>
 

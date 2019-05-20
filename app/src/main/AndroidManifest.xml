@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        package="br.com.alexandre_salgueirinho.iquefome_kotlin">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="br.com.alexandre_salgueirinho.iquefome_kotlin">
 
     <application
             android:allowBackup="true"
@@ -11,37 +10,28 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            tools:ignore="AllowBackup,GoogleAppIndexingWarning"
-            android:windowSoftInputMode="stateHidden">
-
+            android:windowSoftInputMode="stateHidden"
+            tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".view.ClientePratoComposicao">
+        </activity>
         <activity
                 android:name=".view.ClienteCadastro"
                 android:windowSoftInputMode="stateHidden"/>
-
         <activity
                 android:name=".view.ClienteLogin"
                 android:windowSoftInputMode="stateHidden"/>
-
         <activity
                 android:name=".view.ClienteProfile"
                 android:windowSoftInputMode="stateHidden"/>
-
         <activity
                 android:name=".view.ClienteInicial"
                 android:windowSoftInputMode="stateHidden">
-
             <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
 
-                <action
-                        android:name="android.intent.action.MAIN"/>
-
-                <category
-                        android:name="android.intent.category.LAUNCHER"/>
-
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-
         </activity>
-
     </application>
 
 </manifest>
