@@ -31,10 +31,9 @@
             android:id="@+id/composition_Toolbar"
             layout="@layout/layout_toolbar"/>
 
+
     <RelativeLayout android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingLeft="20sp"
-                    android:paddingRight="20sp"
                     android:paddingBottom="20sp"
                     android:layout_marginTop="80sp">
 
@@ -43,6 +42,8 @@
                 android:layout_width="90sp"
                 android:layout_height="90sp"
                 android:layout_marginTop="15sp"
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
                 android:src="@drawable/icon_restaurant_menu"
                 app:civ_border_width="3sp"
                 app:civ_border_color="@color/text_color"/>
@@ -52,53 +53,184 @@
                 android:layout_width="match_parent"
                 android:layout_height="100sp"
                 android:layout_marginTop="10sp"
-                android:orientation="vertical">
+                android:layout_marginStart="120sp"
+                android:layout_marginEnd="20sp"
+                android:orientation="horizontal">
 
-            <TextView
-                    android:id="@+id/composition_Prato_Nome"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="100sp"
-                    android:layout_marginTop="5sp"
-                    android:text="Nome Prato"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/text_color"
-                    android:maxLines="1"
-                    android:ellipsize="end"/>
+            <LinearLayout
+                    android:layout_width="0sp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".6"
+                    android:orientation="vertical">
 
-            <TextView
-                    android:id="@+id/composition_Restaurante_Nome"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="100sp"
+
+                <TextView
+                        android:id="@+id/composition_Prato_Nome"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5sp"
+                        android:text="Nome Prato"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_color"
+                        android:maxLines="2"
+                        android:ellipsize="end"/>
+
+                <TextView
+                        android:id="@+id/composition_Restaurante_Nome"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5sp"
+                        android:text="Nome Restaurante"
+                        android:textSize="15sp"
+                        android:textStyle="italic"
+                        android:textColor="@color/text_color"
+                        android:maxLines="1"
+                        android:ellipsize="end"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="0sp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".4"
                     android:layout_marginTop="10sp"
-                    android:text="Nome Restaurante"
-                    android:textSize="20sp"
-                    android:textStyle="italic"
-                    android:textColor="@color/text_color"
-                    android:maxLines="1"
-                    android:ellipsize="end"/>
+                    android:orientation="vertical">
 
+
+
+                <TextView
+                        android:id="@+id/composition_Prato_Preco"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|end"
+                        android:gravity="bottom|end"
+                        android:text="R$ 20.00"
+                        android:textSize="18sp"
+                        android:textColor="@color/text_color"
+                        android:maxLines="1"
+                        android:ellipsize="end"/>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="end">
+
+
+                    <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/icon_location"
+                            android:layout_gravity="center"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|end"
+                            android:gravity="bottom|end"
+                            android:text="00 m"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:textSize="14sp"
+                            android:textColor="@color/text_color"/>
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 
-        <TextView
-                android:id="@+id/composition_pra"
-                android:layout_width="match_parent"
-                  android:layout_height="wrap_content"/>
 
-        <TextView
-                android:id="@+id/composition_Prato_Descricao"
+        <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="150sp"
-                android:layout_marginTop="20sp"
-                android:text="Descrição do Prato"
-                android:textColor="@color/text_color"
-                android:textAlignment="textStart"
-                android:layout_below="@+id/composition_Prato_Image_and_Name"/>
+                android:layout_height="match_parent"
+                android:layout_below="@+id/composition_Prato_Image_and_Name"
+                android:layout_above="@+id/composition_Buttons">
+
+            <LinearLayout
+                    android:id="@+id/composition_Descricao_Acompanhamentos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="15sp"
+                    android:paddingLeft="20sp"
+                    android:paddingRight="20sp">
+
+                <TextView
+                        android:id="@+id/composition_Prato_Descricao_Label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="DESCRIÇÃO: "
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_color"/>
+
+                <TextView
+                        android:id="@+id/composition_Prato_Descricao_Data"
+                        android:layout_width="match_parent"
+                        android:layout_height="100sp"
+                        android:layout_margin="5sp"
+                        android:text="Descrição do Prato"
+                        android:maxLines="5"
+                        android:ellipsize="end"
+                        android:textColor="@color/text_color"/>
+
+                <TextView
+                        android:id="@+id/composition_Prato_Acompanhamentos_Label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="ACOMPANHAMENTOS: "
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_color"/>
+
+                <TextView
+                        android:id="@+id/composition_Prato_Acompanhamentos_Data"
+                        android:layout_width="match_parent"
+                        android:layout_height="100sp"
+                        android:layout_margin="5sp"
+                        android:text="Acompanhamentos do Prato"
+                        android:maxLines="5"
+                        android:ellipsize="end"
+                        android:textColor="@color/text_color"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+        <LinearLayout
+                android:id="@+id/composition_Buttons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:padding="10sp">
+
+            <Button
+                    android:id="@+id/composition_Button_Editar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10sp"
+                    android:text="EDITAR ACOMPANHAMENTOS"
+                    android:layout_gravity="center"
+                    android:background="@drawable/round_button"/>
+
+            <Button
+                    android:id="@+id/composition_Button_Adicionar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10sp"
+                    android:layout_marginTop="10sp"
+                    android:text="ADICIONAR AO CARRINHO"
+                    android:layout_gravity="center"
+                    android:background="@drawable/round_button"/>
+
+        </LinearLayout>
 
     </RelativeLayout>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/composition_Share"

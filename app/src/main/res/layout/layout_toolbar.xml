@@ -8,7 +8,7 @@
         android:minHeight="?attr/actionBarSize"
         android:background="@null"
         app:titleTextColor="@color/white"
-        tools:menu="@menu/action_menu"
+        tools:menu="@menu/action_menu_account"
         app:title=" ">
 
 </androidx.appcompat.widget.Toolbar>

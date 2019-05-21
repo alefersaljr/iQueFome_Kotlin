@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import br.com.alexandre_salgueirinho.iquefome_kotlin.R
 //import br.com.alexandre_salgueirinho.iquefome_kotlin.model.PratoItem
 import br.com.alexandre_salgueirinho.iquefome_kotlin.model.Pratos
@@ -42,6 +43,13 @@ class ClienteInicial : AppCompatActivity() {
                 inicial_ProgressBar.visibility = View.GONE
             }
         }, 4000)
+
+        composition_Refresh.setOnClickListener {
+            Toast.makeText(this, "Atualizando Pratos", Toast.LENGTH_SHORT).show()
+            inicial_ProgressBar.visibility = View.VISIBLE
+            carregaPratos()
+            inicial_ProgressBar.visibility = View.GONE
+        }
     }
 
     companion object{
@@ -83,13 +91,13 @@ class ClienteInicial : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.action_menu, menu)
+        menuInflater.inflate(R.menu.action_menu_account, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.action_menu_profile -> {
+            R.id.action_menu_icon_account -> {
                 if (FirebaseAuth.getInstance().currentUser != null) startActivity(
                     Intent(
                         this,

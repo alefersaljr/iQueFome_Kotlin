@@ -4,9 +4,9 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-            android:id="@+id/action_menu_profile_page_deslogar"
-            android:title="Deslogar"
-            android:icon="@drawable/icon_exit"
+            android:id="@+id/action_menu_icon_shop"
+            android:title="Meu Carrinho"
+            android:icon="@drawable/icon_shopping"
             app:showAsAction="always"/>
 
 </menu>

@@ -80,14 +80,14 @@ class ClienteProfile : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.action_menu_profile_page, menu)
+        menuInflater.inflate(R.menu.action_menu_logout, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             idBackButton -> onBackPressed()
-            R.id.action_menu_profile_page_deslogar -> {
+            R.id.action_menu_icon_logout -> {
                 FirebaseAuth.getInstance().signOut()
                 Log.d("ClienteProfileActivity", "Usuário deslogado")
                 finish()

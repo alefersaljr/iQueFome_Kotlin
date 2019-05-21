@@ -46,6 +46,14 @@ class ClientePratoComposicao : AppCompatActivity() {
         composition_Share.setOnClickListener { view ->
             sharePrato(prato)
         }
+
+        composition_Button_Editar.setOnClickListener {
+            Toast.makeText(this, "Acompanhamentos em desenvolvimento, aguarde", Toast.LENGTH_SHORT).show()
+        }
+
+        composition_Button_Adicionar.setOnClickListener {
+            Toast.makeText(this, "Carrinho em desenvolvimento, aguarde", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun sharePrato(prato: Pratos) {
@@ -71,10 +79,12 @@ class ClientePratoComposicao : AppCompatActivity() {
 
                 try {
                     if (prato != null) {
+                        val preco = "R\$" + prato.pratoPreco
+
                         composition_Prato_Nome.text = prato.pratoNome
                         composition_Restaurante_Nome.text = prato.pratoRestaurante
-//                        textViewCelular_Data.text = prato.
-//                        textViewEmail_Data.text = prato.
+                        composition_Prato_Descricao_Data.text = prato.pratoDescricao
+                        composition_Prato_Preco.text = preco
 //                        textViewIndicado_Data.text = prato.
 
                         Picasso.get().load(prato.pratoUrlFoto).into(composition_Prato_Foto)
@@ -99,17 +109,15 @@ class ClientePratoComposicao : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.action_menu_profile_page, menu)
+        menuInflater.inflate(R.menu.action_menu_shop, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             idBackButton -> onBackPressed()
-            R.id.action_menu_profile_page_deslogar -> {
-                FirebaseAuth.getInstance().signOut()
-                Log.d("ClienteProfileActivity", "Usuário deslogado")
-                finish()
+            R.id.action_menu_icon_shop -> {
+                Toast.makeText(this, "Carrinho em desenvolvimento, aguarde", Toast.LENGTH_SHORT).show()
             }
         }
         return true
