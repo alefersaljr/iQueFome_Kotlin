@@ -172,7 +172,8 @@ class ClienteCadastro : AppCompatActivity() {
 
     private fun saveUserToFirebaseDatabase(urlImagemPerfil: String) {
         val uid = FirebaseAuth.getInstance().uid ?: ""
-        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+        val uName = cadastro_EditText_Nome.text.toString() + " " + cadastro_EditText_Sobrenome.text.toString()
+        val ref = FirebaseDatabase.getInstance().getReference("/users/cadastros/clientes/$uName")
 
         val user = Usuário(
             uid,

@@ -57,7 +57,7 @@ class ClienteInicial : AppCompatActivity() {
     }
 
     private fun carregaPratos() {
-        val ref = FirebaseDatabase.getInstance().getReference("/pratos")
+        val ref = FirebaseDatabase.getInstance().getReference("/pratos/clientes")
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
 
             override fun onDataChange(p0: DataSnapshot) {
@@ -65,10 +65,10 @@ class ClienteInicial : AppCompatActivity() {
 
                 p0.children.forEach {
                     Log.d("ClienteInicial", it.toString())
-                    val teste = it.getValue(Pratos::class.java)
+                    val pratoItem = it.getValue(Pratos::class.java)
 
-                    if (teste != null) {
-                        adapter.add(PratoItem(teste))
+                    if (pratoItem != null) {
+                        adapter.add(PratoItem(pratoItem))
                     }
                 }
 

@@ -42,7 +42,7 @@ class ClienteProfile : AppCompatActivity() {
         profile_ProgressBar.visibility = View.VISIBLE
 
         val userID = FirebaseAuth.getInstance().currentUser?.uid
-        val ref = FirebaseDatabase.getInstance().getReference("/users/$userID")
+        val ref = FirebaseDatabase.getInstance().getReference("/users/cadastros/clientes/$userID")
 
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
@@ -53,10 +53,10 @@ class ClienteProfile : AppCompatActivity() {
                 try {
                     if (user != null) {
                         textViewNome.text = user.userNome
-                        textViewSobrenome.setText(user.userSobrenome)
-                        textViewCelular_Data.setText(user.userCelular)
-                        textViewEmail_Data.setText(user.userEmail)
-                        textViewIndicado_Data.setText(user.userIndicado)
+                        textViewSobrenome.text = user.userSobrenome
+                        textViewCelular_Data.text = user.userCelular
+                        textViewEmail_Data.text = user.userEmail
+                        textViewIndicado_Data.text = user.userIndicado
 
                         Picasso.get().load(user.userUrlImagemPerfil).into(perfil_image)
 

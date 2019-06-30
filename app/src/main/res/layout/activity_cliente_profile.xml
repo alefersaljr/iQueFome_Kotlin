@@ -5,7 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent" android:layout_height="match_parent"
         tools:context=".view.ClienteProfile"
-        android:background="@drawable/back_default">
+        android:background="@android:color/white">
 
     <TextView
             android:id="@+id/cadastro_TextView_Cadastro"
@@ -16,14 +16,14 @@
             android:textAlignment="center"
             android:textSize="30sp"
             android:textStyle="bold"
-            android:textColor="@color/text_color"/>
+            android:textColor="@color/text_color_dark"/>
 
     <View
             android:layout_width="250sp"
             android:layout_height="4sp"
             android:layout_marginTop="5sp"
             android:layout_centerHorizontal="true"
-            android:background="@color/text_color"
+            android:background="@color/text_color_dark"
             android:layout_below="@+id/profile_Toolbar"/>
 
     <include
@@ -107,7 +107,7 @@
                             android:id="@+id/textViewCelular"
                             android:layout_width="0sp"
                             android:layout_height="25sp"
-                            android:layout_weight=".1"
+                            android:layout_weight=".12"
                             android:layout_marginTop="28sp"
                             android:fontFamily="sans-serif"
                             android:text="Celular:"
@@ -123,7 +123,7 @@
                             android:layout_marginStart="5sp"
                             android:fontFamily="sans-serif"
                             android:text="Número Celular"
-                            android:textColor="@color/text_color"
+                            android:textColor="@color/text_color_light"
                             android:textSize="16sp"
                             android:maxLines="1"
                             android:ellipsize="end"/>
@@ -140,7 +140,7 @@
                             android:id="@+id/textViewEmail"
                             android:layout_width="0sp"
                             android:layout_height="25sp"
-                            android:layout_weight=".08"
+                            android:layout_weight=".1"
                             android:layout_marginTop="26sp"
                             android:fontFamily="sans-serif"
                             android:text="Email:"
@@ -156,7 +156,7 @@
                             android:layout_marginStart="5sp"
                             android:fontFamily="sans-serif"
                             android:text="Email"
-                            android:textColor="@color/text_color"
+                            android:textColor="@color/text_color_light"
                             android:textSize="16sp"/>
 
                 </LinearLayout>
@@ -171,7 +171,7 @@
                             android:id="@+id/textViewIndicado"
                             android:layout_width="0sp"
                             android:layout_height="25sp"
-                            android:layout_weight=".2"
+                            android:layout_weight=".23"
                             android:layout_marginTop="26sp"
                             android:fontFamily="sans-serif"
                             android:text="Indicado Por:"
@@ -188,7 +188,7 @@
                             android:layout_marginStart="5sp"
                             android:fontFamily="sans-serif"
                             android:text="Número Celular"
-                            android:textColor="@color/text_color"
+                            android:textColor="@color/text_color_light"
                             android:textSize="16sp"
                             android:visibility="visible"
                             android:maxLines="1"
@@ -219,7 +219,7 @@
                     android:background="@drawable/round_button"
                     android:text="Histórico Pedidos"
                     android:textAllCaps="false"
-                    android:textColor="#2b1c00"/>
+                    android:textColor="@color/text_color_dark"/>
 
         </LinearLayout>
 
@@ -229,7 +229,7 @@
             android:id="@+id/profile_ProgressBar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#77b8a076"
+            android:background="#77BDBDBD"
             android:visibility="gone">
 
 

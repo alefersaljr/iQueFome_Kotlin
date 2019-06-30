@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".view.ClienteLogin"
-        android:background="@drawable/back_default">
+        android:background="@android:color/white">
 
     <TextView
             android:id="@+id/login_TextView_Login"
@@ -16,14 +16,14 @@
             android:textAlignment="center"
             android:textSize="30sp"
             android:textStyle="bold"
-            android:textColor="@color/text_color"/>
+            android:textColor="@color/text_color_dark"/>
 
     <View
             android:layout_width="250sp"
             android:layout_height="4sp"
             android:layout_marginTop="5sp"
             android:layout_centerHorizontal="true"
-            android:background="@color/text_color"
+            android:background="@color/text_color_dark"
             android:layout_below="@+id/login_Toolbar"/>
 
     <include
@@ -95,7 +95,7 @@
                 android:layout_marginRight="30sp"
                 android:text="@string/login_Button_Login"
                 android:textStyle="bold"
-                android:textColor="@color/text_color"
+                android:textColor="@color/text_color_dark"
                 android:background="@drawable/round_button"/>
 
         <TextView
@@ -104,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20sp"
                 android:text="@string/login_TextView_RecuperarSenha"
-                android:textColor="@color/text_color"
+                android:textColor="@color/text_color_dark"
                 android:textAlignment="center"/>
 
         <TextView
@@ -113,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20sp"
                 android:text="@string/login_TextView_Cadastro"
-                android:textColor="@color/text_color"
+                android:textColor="@color/text_color_dark"
                 android:textAlignment="center"/>
     </LinearLayout>
 
@@ -121,7 +121,7 @@
             android:id="@+id/login_ProgressBar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#77b8a076"
+            android:background="#77BDBDBD"
             android:visibility="gone">
 
 

@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".view.ClienteInicial"
-        android:background="@drawable/back_default">
+        android:background="@android:color/white">
 
     <TextView
             android:id="@+id/cadastro_TextView_Cadastro"
@@ -17,14 +17,14 @@
             android:textAlignment="center"
             android:textSize="30sp"
             android:textStyle="bold"
-            android:textColor="@color/text_color"/>
+            android:textColor="@color/text_color_dark"/>
 
     <View
             android:layout_width="250sp"
             android:layout_height="4sp"
             android:layout_marginTop="5sp"
             android:layout_centerHorizontal="true"
-            android:background="@color/text_color"
+            android:background="@color/text_color_dark"
             android:layout_below="@+id/menu_Toolbar"/>
 
     <include
@@ -43,7 +43,7 @@
             android:id="@+id/inicial_ProgressBar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#77b8a076">
+            android:background="#77BDBDBD">
 
 
         <ProgressBar
@@ -62,9 +62,9 @@
             android:layout_alignParentStart="true"
             android:layout_marginTop="10sp"
             android:layout_marginStart="10sp"
-            android:src="@drawable/icon_refresh"
             app:borderWidth="0sp"
-            android:backgroundTint="@color/text_color"
+            android:backgroundTint="@color/text_color_dark"
+            android:src="@drawable/icon_refresh"
             app:fabSize="mini"/>
 
 </RelativeLayout>
