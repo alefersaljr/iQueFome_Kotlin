@@ -112,22 +112,22 @@ class ClienteCadastro : AppCompatActivity() {
 
                 nome.isEmpty() -> {
                     cadastro_EditText_Nome.requestFocus()
-                    cadastro_Textfild_Nome.error = "É necessário informar um userNome"
+                    cadastro_Textfild_Nome.error = "É necessário informar um Nome"
                 }
 
                 sobrenome.isEmpty() -> {
                     cadastro_EditText_Sobrenome.requestFocus()
-                    cadastro_Textfild_Nome.error = "É necessário informar um userSobrenome"
+                    cadastro_Textfild_Nome.error = "É necessário informar um Sobrenome"
                 }
 
                 email.isEmpty() -> {
                     cadastro_EditText_Email.requestFocus()
-                    cadastro_Textfild_Email.error = "É necessário informar um userEmail"
+                    cadastro_Textfild_Email.error = "É necessário informar um Email"
                 }
 
                 password.isEmpty() -> {
                     cadastro_EditText_Password.requestFocus()
-                    cadastro_Textfild_Password.error = "É necessário informar uma senha"
+                    cadastro_Textfild_Password.error = "É necessário informar uma Senha"
                 }
 
                 uriImagemSelecionada == null -> {
@@ -141,7 +141,7 @@ class ClienteCadastro : AppCompatActivity() {
 
                 celular.isEmpty() -> {
                     cadastro_EditText_Celular.requestFocus()
-                    cadastro_Textfild_Celular.error = "É necessário informar um userCelular"
+                    cadastro_Textfild_Celular.error = "É necessário informar um Celular"
                 }
 
             }
@@ -172,8 +172,7 @@ class ClienteCadastro : AppCompatActivity() {
 
     private fun saveUserToFirebaseDatabase(urlImagemPerfil: String) {
         val uid = FirebaseAuth.getInstance().uid ?: ""
-        val uName = cadastro_EditText_Nome.text.toString() + " " + cadastro_EditText_Sobrenome.text.toString()
-        val ref = FirebaseDatabase.getInstance().getReference("/users/cadastros/clientes/$uName")
+        val ref = FirebaseDatabase.getInstance().getReference("/users/cadastros/clientes/$uid")
 
         val user = Usuário(
             uid,

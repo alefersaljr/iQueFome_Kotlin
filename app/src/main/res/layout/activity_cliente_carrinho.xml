@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.ClienteProfile"
+        android:background="@android:color/white">
+
+    <TextView
+            android:id="@+id/carrinho_TextView_Cadastro"
+            android:layout_width="match_parent"
+            android:layout_height="56sp"
+            android:paddingTop="13sp"
+            android:text="Meu Carrinho"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_color_dark"/>
+
+    <View
+            android:layout_width="250sp"
+            android:layout_height="4sp"
+            android:layout_marginTop="5sp"
+            android:layout_centerHorizontal="true"
+            android:background="@color/text_color_dark"
+            android:layout_below="@+id/carrinho_Toolbar"/>
+
+    <include
+            android:id="@+id/carrinho_Toolbar"
+            layout="@layout/layout_toolbar"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/carrinho_Recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/carrinho_Toolbar"
+                android:layout_above="@+id/botaoReserva_layout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="15dp"
+                android:orientation="vertical">
+
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+        <LinearLayout
+                android:id="@+id/botaoReserva_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginBottom="15dp"
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_color"
+                        android:text="Total:  R$ "/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:textStyle="italic"
+                        android:textColor="@color/text_color"
+                        android:text=" 00.00"/>
+
+            </LinearLayout>
+
+            <Button
+                    android:id="@+id/carrinho_Button_Reserva"
+                    android:layout_width="wrap_content"
+                    android:layout_height="56dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/round_button"
+                    android:text="RESERVAR"
+                    android:textAllCaps="false"
+                    android:textColor="@color/text_color_dark"
+                    android:drawableStart="@drawable/icon_shopping"
+                    android:drawablePadding="5sp"
+                    android:padding="10dp"/>
+
+        </LinearLayout>
+
+    <RelativeLayout
+            android:id="@+id/carrinho_ProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#77BDBDBD"
+            android:visibility="gone">
+
+
+        <ProgressBar
+                android:layout_width="70sp"
+                android:layout_height="70sp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

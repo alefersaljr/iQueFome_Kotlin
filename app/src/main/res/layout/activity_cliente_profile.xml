@@ -211,13 +211,14 @@
 
             <Button
                     android:id="@+id/profile_Button_Historico"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="56dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
+                    android:padding="10dp"
                     android:background="@drawable/round_button"
-                    android:text="Histórico Pedidos"
+                    android:text="HISTÓRICO DE RESERVAS"
                     android:textAllCaps="false"
                     android:textColor="@color/text_color_dark"/>
 

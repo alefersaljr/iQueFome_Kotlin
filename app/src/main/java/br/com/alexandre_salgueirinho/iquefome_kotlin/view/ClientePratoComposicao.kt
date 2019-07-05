@@ -52,7 +52,10 @@ class ClientePratoComposicao : AppCompatActivity() {
         }
 
         composition_Button_Adicionar.setOnClickListener {
-            Toast.makeText(this, "Carrinho em desenvolvimento, aguarde", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "Carrinho em desenvolvimento, aguarde", Toast.LENGTH_SHORT).show()
+            startActivity(
+                Intent(this, ClienteCarrinho::class.java)
+            )
         }
     }
 
