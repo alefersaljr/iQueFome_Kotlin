@@ -66,10 +66,10 @@ class ClienteCadastro : AppCompatActivity() {
             val password = cadastro_EditText_Password.text.toString()
 
             if (validaCampos(email, password)) {
-//            if (!PhoneNumberUtils.isGlobalPhoneNumber(userCelular) || !Patterns.PHONE.matcher(userCelular).matches()) {
+//            if (!PhoneNumberUtils.isGlobalPhoneNumber(Cliente_Celular) || !Patterns.PHONE.matcher(Cliente_Celular).matches()) {
 //                Toast.makeText(
 //                    this,
-//                    "É necessário informar um userCelular certo",
+//                    "É necessário informar um Cliente_Celular certo",
 //                    Toast.LENGTH_SHORT
 //                ).show()
 
@@ -85,7 +85,7 @@ class ClienteCadastro : AppCompatActivity() {
                             return@addOnCompleteListener
                         }
 
-                        Log.d("ClienteCadastroActivity", "Usuário criado, userId: ${it.result!!.user.uid}")
+                        Log.d("ClienteCadastroActivity", "Usuário criado, Cliente_Id: ${it.result!!.user.uid}")
 
                         uploadImage()
 

@@ -51,7 +51,7 @@ class ClienteCarrinho : AppCompatActivity() {
 //                            Log.d("Popup", "sucesso")
 //                            Toast.makeText(
 //                                this,
-//                                "Um userEmail de recuperação de senha foi enviado para você",
+//                                "Um Cliente_Email de recuperação de senha foi enviado para você",
 //                                Toast.LENGTH_SHORT
 //                            ).show()
 //

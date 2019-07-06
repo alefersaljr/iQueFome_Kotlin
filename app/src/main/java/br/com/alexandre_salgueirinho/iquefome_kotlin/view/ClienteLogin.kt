@@ -63,7 +63,7 @@ class ClienteLogin : AppCompatActivity() {
                             Log.d("Popup", "sucesso")
                             Toast.makeText(
                                 this,
-                                "Um userEmail de recuperação de senha foi enviado para você",
+                                "Um Cliente_Email de recuperação de senha foi enviado para você",
                                 Toast.LENGTH_SHORT
                             ).show()
 
@@ -80,7 +80,7 @@ class ClienteLogin : AppCompatActivity() {
                     Log.d("Popup", "Erro")
                     Toast.makeText(
                         this,
-                        "Informe um userEmail para que lhe seja enviado a recuperação de senha",
+                        "Informe um Cliente_Email para que lhe seja enviado a recuperação de senha",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
