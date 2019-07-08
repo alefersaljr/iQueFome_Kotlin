@@ -12,6 +12,10 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:windowSoftInputMode="stateHidden"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".view.ClienteHistoricoReservaDetalhes">
+        </activity>
+        <activity android:name=".view.ClienteHistoricoReserva">
+        </activity>
         <activity android:name=".view.ClientePratoComposicao">
         </activity>
         <activity

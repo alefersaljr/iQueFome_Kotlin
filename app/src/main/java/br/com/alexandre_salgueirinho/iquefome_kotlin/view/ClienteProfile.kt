@@ -1,5 +1,6 @@
 package br.com.alexandre_salgueirinho.iquefome_kotlin.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -21,6 +22,7 @@ import kotlinx.android.synthetic.main.activity_cliente_profile.*
 class ClienteProfile : AppCompatActivity() {
 
     private lateinit var mToolbar: androidx.appcompat.widget.Toolbar
+    lateinit var user: Usuário
     val idBackButton = 16908332
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +36,8 @@ class ClienteProfile : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         profile_Button_Historico.setOnClickListener {
-            Toast.makeText(this, "Em desenvolvimento, aguarde", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "Em desenvolvimento, aguarde", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, ClienteHistoricoReserva::class.java))
         }
     }
 

@@ -50,7 +50,7 @@
             android:orientation="vertical"
             android:gravity="center"
             android:layout_centerVertical="true"
-            android:layout_margin="5sp">
+            android:layout_margin="10dp">
 
         <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/reserva_popup_hora_Field"
@@ -78,6 +78,8 @@
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="Deseja retirar algum ingrediente?"
                 android:textColor="@color/text_color"
                 android:textStyle="bold"
@@ -87,7 +89,9 @@
                 android:id="@+id/reserva_popup_alteracoes"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:padding="10dp"
                 android:gravity="start"
                 android:hint="Preencha suas alterações aqui"
                 android:background="@drawable/round_button"

@@ -45,7 +45,6 @@ class ClienteInicial : AppCompatActivity() {
 
         mToolbar = findViewById(R.id.menu_Toolbar)
         setSupportActionBar(mToolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         inicializaFloatingMenu()
 
@@ -102,16 +101,63 @@ class ClienteInicial : AppCompatActivity() {
             isFavorito = !isFavorito
             if (isFavorito) {
                 floating_Filter_one.setImageResource(R.drawable.icon_star_on)
+                getFavoritos()
             }else if (!isFavorito){
                 floating_Filter_one.setImageResource(R.drawable.icon_star_off)
+                carregaPratos()
             }
-            Toast.makeText(this@ClienteInicial, "$isFavorito", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this@ClienteInicial, "$isFavorito", Toast.LENGTH_SHORT).show()
         }
 
         floating_Filter_two.setOnClickListener {
             Toast.makeText(this@ClienteInicial, "Clicou no segundo", Toast.LENGTH_SHORT).show()
         }
 
+    }
+
+    private fun getFavoritos() {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+
+        if (userId.isNullOrEmpty()){
+            Toast.makeText(applicationContext, "É necessário logar primeiro", Toast.LENGTH_SHORT).show()
+        }else {
+            Toast.makeText(applicationContext, "Carregando Favoritos...", Toast.LENGTH_SHORT).show()
+
+            val ref = FirebaseDatabase.getInstance().getReference("/pratos/favoritos/$userId")
+            ref.addListenerForSingleValueEvent(object : ValueEventListener {
+
+                override fun onDataChange(p0: DataSnapshot) {
+                    val adapter = GroupAdapter<ViewHolder>()
+
+                    p0.children.forEach {
+                        Log.d("ClienteInicial", it.toString())
+                        val pratoItem = it.getValue(Pratos::class.java)
+
+                        if (pratoItem != null) {
+                            adapter.add(PratoItem(pratoItem))
+                        }
+                    }
+
+                    adapter.setOnItemClickListener { item, view ->
+
+                        inicial_ProgressBar.visibility = View.VISIBLE
+
+                        val pratoI = item as PratoItem
+
+                        val intent = Intent(view.context, ClientePratoComposicao::class.java)
+                        intent.putExtra(PRATO_KEY, pratoI.prato)
+
+                        inicial_ProgressBar.visibility = View.GONE
+                        startActivity(intent)
+                    }
+                    inicial_RecyclerView.adapter = adapter
+                }
+
+                override fun onCancelled(p0: DatabaseError) {}
+            })
+
+            Toast.makeText(applicationContext, "Favoritos carregados", Toast.LENGTH_SHORT).show()
+        }
     }
 
     companion object {
@@ -175,11 +221,6 @@ class ClienteInicial : AppCompatActivity() {
                 )
             }
         }
-        return true
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
         return true
     }
 }

@@ -20,7 +20,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_cliente_prato_composicao.*
-import kotlinx.android.synthetic.main.popup_reserva.*
 import kotlinx.android.synthetic.main.popup_reserva.view.*
 import java.util.*
 
@@ -28,7 +27,7 @@ class ClientePratoComposicao : AppCompatActivity() {
 
     private lateinit var mToolbar: androidx.appcompat.widget.Toolbar
     var isFavorito = false
-    val userId = FirebaseAuth.getInstance().currentUser?.uid
+    var userId = FirebaseAuth.getInstance().currentUser?.uid
     var reserva_Cliente_Nome = ""
     var reserva_Cliente_Sobrenome = ""
     var reserva_Cliente_Pontos = ""
@@ -45,9 +44,7 @@ class ClientePratoComposicao : AppCompatActivity() {
 
         getPrato(prato.pratoId)
 
-        getClienteData()
-
-        favoritar()
+        favoritar(prato)
 
         val handler = Handler()
         handler.postDelayed(object : Runnable {
@@ -60,17 +57,28 @@ class ClientePratoComposicao : AppCompatActivity() {
             sharePrato(prato)
         }
 
-        composition_Button_Editar.setOnClickListener {
+        composition_Button_Reservar.setOnClickListener {
             Toast.makeText(this, "Acompanhamentos em desenvolvimento, aguarde", Toast.LENGTH_SHORT).show()
         }
 
-        composition_Button_Adicionar.setOnClickListener {
+        composition_Button_Reservar.setOnClickListener {
             //            Toast.makeText(this, "Carrinho em desenvolvimento, aguarde", Toast.LENGTH_SHORT).show()
 //            startActivity(
 //                Intent(this, ClienteCarrinho::class.java)
 //            )
-            doReserva(prato)
+            if (userId.isNullOrEmpty()) {
+                Toast.makeText(applicationContext, "É necessário realizar o login primeiro", Toast.LENGTH_LONG).show()
+                startActivity(Intent(applicationContext, ClienteLogin::class.java))
+            } else {
+                doReserva(prato)
+            }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        userId = FirebaseAuth.getInstance().currentUser?.uid
     }
 
     private fun getClienteData() {
@@ -102,7 +110,10 @@ class ClientePratoComposicao : AppCompatActivity() {
         val mAlertDialog = mBuilder.show()
 
         mDialog.reserva_popup_Button_Enviar.setOnClickListener {
+            composition_ProgressBar.visibility = View.VISIBLE
             mDialog.reserva_popup_ProgressBar.visibility = View.VISIBLE
+
+            getClienteData()
 
             reservar(prato, mAlertDialog, mDialog)
         }
@@ -114,46 +125,96 @@ class ClientePratoComposicao : AppCompatActivity() {
 
     private fun reservar(prato: Pratos, mAlertDialog: AlertDialog, mDialog: View) {
         val reserva_Id = UUID.randomUUID().toString()
-        val reserva_Hora = reserva_popup_hora_Data.text.toString()
-        val reserva_Cliente_Alteracao = reserva_popup_alteracoes.text.toString()
+        val reserva_Hora = mDialog.reserva_popup_hora_Data.text.toString().replace(".", ":")
+        val reserva_Cliente_Alteracao = mDialog.reserva_popup_alteracoes.text.toString()
         val reserva_Prato_Nome = prato.pratoNome
         val reserva_Prato_Preco = prato.pratoPreco
+        val reserva_Restaurante_Nome = prato.pratoRestaurante
 
-        val ref = FirebaseDatabase.getInstance().getReference("/reservas/restaurante/$reserva_Id")
-        val refHistorico =FirebaseDatabase.getInstance().getReference("/reservas/historico/$userId/$reserva_Id")
+        if (userId != null) {
 
-        var reserva = Reservas(
-            reserva_Id,
-            reserva_Hora,
-            reserva_Cliente_Nome,
-            reserva_Cliente_Sobrenome,
-            reserva_Cliente_Alteracao,
-            reserva_Cliente_Pontos,
-            reserva_Prato_Nome,
-            reserva_Prato_Preco
-        )
+            val ref = FirebaseDatabase.getInstance().getReference("/reservas/restaurante/$reserva_Id")
+            val refHistorico = FirebaseDatabase.getInstance().getReference("/reservas/historico/$userId/$reserva_Id")
 
-        ref.setValue(reserva).addOnSuccessListener {
-            Log.d("CadastroTESTE", "Finalmente deu boa")
-            Toast.makeText(geta)
-        }.addOnFailureListener {
-            cadastro_ProgressBar.visibility = View.GONE
-            Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
+            val reserva = Reservas(
+                reserva_Id,
+                userId!!,
+                reserva_Hora,
+                reserva_Cliente_Nome,
+                reserva_Cliente_Sobrenome,
+                reserva_Cliente_Alteracao,
+                reserva_Cliente_Pontos,
+                reserva_Prato_Nome,
+                reserva_Prato_Preco,
+                reserva_Restaurante_Nome
+            )
+
+            ref.setValue(reserva).addOnSuccessListener {
+                Log.d("CadastroTESTE", "Finalmente deu boa")
+                Toast.makeText(applicationContext, "Reservado com sucesso", Toast.LENGTH_SHORT).show()
+            }.addOnFailureListener {
+                mDialog.reserva_popup_ProgressBar.visibility = View.GONE
+                Toast.makeText(this, "Erro na reserva, ${it.message}", Toast.LENGTH_LONG).show()
+            }
+
+            refHistorico.setValue(reserva).addOnSuccessListener {
+                Log.d("CadastroTESTE", "Finalmente deu boa")
+                Toast.makeText(applicationContext, "Reservado com sucesso", Toast.LENGTH_SHORT).show()
+            }.addOnFailureListener {
+                mDialog.reserva_popup_ProgressBar.visibility = View.GONE
+                Toast.makeText(this, "Erro na reserva, ${it.message}", Toast.LENGTH_LONG).show()
+            }
+
+            mAlertDialog.dismiss()
         }
-
-        mAlertDialog.dismiss()
         mDialog.reserva_popup_ProgressBar.visibility = View.GONE
+        composition_ProgressBar.visibility = View.GONE
+        finish()
     }
 
-    private fun favoritar() {
+    private fun favoritar(prato: Pratos) {
         float_button_favorito.setOnClickListener {
             isFavorito = !isFavorito
             if (isFavorito) {
                 float_button_favorito.setImageResource(R.drawable.icon_star_on)
+                setFavorito(prato)
             } else if (!isFavorito) {
                 float_button_favorito.setImageResource(R.drawable.icon_star_off)
+                removeFavorito(prato)
             }
-            Toast.makeText(this@ClientePratoComposicao, "$isFavorito", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this@ClientePratoComposicao, "$isFavorito", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun removeFavorito(prato: Pratos) {
+        val ref = FirebaseDatabase.getInstance().getReference("/pratos/favoritos/$userId/${prato.pratoId}")
+
+        ref.removeValue()
+
+        Toast.makeText(applicationContext, "Prato Desfavoritado", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun setFavorito(prato: Pratos) {
+        val ref = FirebaseDatabase.getInstance().getReference("/pratos/favoritos/$userId/${prato.pratoId}")
+
+        val pratoFavorito = Pratos(
+            prato.pratoId,
+            prato.pratoNome,
+            prato.pratoPreco,
+            prato.pratoRestaurante,
+            prato.pratoRestauranteId,
+            prato.pratoUrlFoto,
+            prato.pratoDescricao,
+            prato.pratoTipo,
+            prato.pratoTipoComida
+        )
+
+        ref.setValue(pratoFavorito).addOnSuccessListener {
+            Log.d("Favoritar", "Favoritado")
+            Toast.makeText(applicationContext, "Prato Favoritado", Toast.LENGTH_SHORT).show()
+        }.addOnFailureListener {
+            Log.d("Favoritar", "Erro ao favoritar")
+            Toast.makeText(applicationContext, "Erro ao Favoritar", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -169,6 +230,8 @@ class ClientePratoComposicao : AppCompatActivity() {
     }
 
     private fun getPrato(pratoID: String) {
+
+        getClienteData()
 
         val ref = FirebaseDatabase.getInstance().getReference("/pratos/clientes/$pratoID")
 
@@ -207,5 +270,10 @@ class ClientePratoComposicao : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }
