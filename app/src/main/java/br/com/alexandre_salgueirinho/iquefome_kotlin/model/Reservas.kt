@@ -14,8 +14,9 @@ class Reservas(
     val cliente_pontos: String,
     val prato_Nome: String,
     val prato_Preco: String,
-    val restaurante_Nome: String
+    val restaurante_Nome: String,
+    val restaurante_Id: String
 
 ): Parcelable {
-    constructor() : this("", "", "", "", "", "", "", "", "", "")
+    constructor() : this("", "", "", "", "", "", "", "", "", "", "")
 }

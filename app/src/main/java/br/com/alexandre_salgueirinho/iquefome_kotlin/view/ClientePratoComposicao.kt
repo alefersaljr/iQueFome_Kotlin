@@ -130,10 +130,11 @@ class ClientePratoComposicao : AppCompatActivity() {
         val reserva_Prato_Nome = prato.pratoNome
         val reserva_Prato_Preco = prato.pratoPreco
         val reserva_Restaurante_Nome = prato.pratoRestaurante
+        val reserva_Restaurante_Id = prato.pratoRestauranteId
 
         if (userId != null) {
 
-            val ref = FirebaseDatabase.getInstance().getReference("/reservas/restaurante/$reserva_Id")
+            val ref = FirebaseDatabase.getInstance().getReference("/reservas/restaurante/${prato.pratoRestauranteId}/$reserva_Id")
             val refHistorico = FirebaseDatabase.getInstance().getReference("/reservas/historico/$userId/$reserva_Id")
 
             val reserva = Reservas(
@@ -146,7 +147,8 @@ class ClientePratoComposicao : AppCompatActivity() {
                 reserva_Cliente_Pontos,
                 reserva_Prato_Nome,
                 reserva_Prato_Preco,
-                reserva_Restaurante_Nome
+                reserva_Restaurante_Nome,
+                reserva_Restaurante_Id
             )
 
             ref.setValue(reserva).addOnSuccessListener {

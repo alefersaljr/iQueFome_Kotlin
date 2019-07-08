@@ -2,12 +2,20 @@ package br.com.alexandre_salgueirinho.iquefome_kotlin.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import br.com.alexandre_salgueirinho.iquefome_kotlin.R
+import br.com.alexandre_salgueirinho.iquefome_kotlin.model.Feedback
 import br.com.alexandre_salgueirinho.iquefome_kotlin.model.Reservas
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_cliente_historico_reserva_detalhes.*
+import kotlinx.android.synthetic.main.activity_cliente_prato_composicao.*
+import kotlinx.android.synthetic.main.popup_feedback.view.*
+import kotlinx.android.synthetic.main.popup_recuperar.view.*
+import java.util.*
 
 class ClienteHistoricoReservaDetalhes : AppCompatActivity() {
 
@@ -28,7 +36,7 @@ class ClienteHistoricoReservaDetalhes : AppCompatActivity() {
         getReservaData(reserva)
 
         historico_Detalhes_Button_Feedback.setOnClickListener {
-            goToFeedback()
+            goToFeedback(reserva)
         }
     }
 
@@ -43,8 +51,38 @@ class ClienteHistoricoReservaDetalhes : AppCompatActivity() {
         historico_Detalhes_alteracao_Data.text = reserva?.cliente_Alteracao
     }
 
-    private fun goToFeedback() {
-        Toast.makeText(applicationContext, "Em dev. aguarde", Toast.LENGTH_SHORT).show()
+    private fun goToFeedback(reserva: Reservas) {
+        val mDialog = LayoutInflater.from(this).inflate(R.layout.popup_feedback, null)
+        val mBuilder = AlertDialog.Builder(this).setView(mDialog)
+        val mAlertDialog = mBuilder.show()
+
+        val feedback_Id = UUID.randomUUID().toString()
+
+        val ref = db.getReference("/feedbacks/${reserva.restaurante_Id}/$feedback_Id")
+
+        mDialog.feedback_popup_Button_Enviar.setOnClickListener {
+
+            val feedback_Cliente_Alteracao = mDialog.feedback_popup_alteracoes.text.toString()
+            val feedback_Prato_Nome = reserva.prato_Nome
+
+            val feedback = Feedback(
+                feedback_Id,
+                feedback_Cliente_Alteracao,
+                feedback_Prato_Nome,
+                reserva.restaurante_Id
+            )
+            ref.setValue(feedback).addOnSuccessListener {
+                Toast.makeText(applicationContext, "Feedback enviado", Toast.LENGTH_SHORT).show()
+                mAlertDialog.dismiss()
+                historico_Detalhes_Button_Feedback.isEnabled = false
+            }.addOnFailureListener {
+                Toast.makeText(applicationContext, "Falha ao enviar o feedback", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        mDialog.feedback_popup_Button_Close.setOnClickListener {
+            mAlertDialog.dismiss()
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
