@@ -4,18 +4,23 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import br.com.alexandre_salgueirinho.iquefome_kotlin.R
 import br.com.alexandre_salgueirinho.iquefome_kotlin.model.Pratos
+import br.com.alexandre_salgueirinho.iquefome_kotlin.model.Reservas
+import br.com.alexandre_salgueirinho.iquefome_kotlin.model.Usuário
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_cliente_prato_composicao.*
+import kotlinx.android.synthetic.main.popup_reserva.*
 import kotlinx.android.synthetic.main.popup_reserva.view.*
 import java.util.*
 
@@ -23,6 +28,10 @@ class ClientePratoComposicao : AppCompatActivity() {
 
     private lateinit var mToolbar: androidx.appcompat.widget.Toolbar
     var isFavorito = false
+    val userId = FirebaseAuth.getInstance().currentUser?.uid
+    var reserva_Cliente_Nome = ""
+    var reserva_Cliente_Sobrenome = ""
+    var reserva_Cliente_Pontos = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,7 +74,26 @@ class ClientePratoComposicao : AppCompatActivity() {
     }
 
     private fun getClienteData() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val ref = FirebaseDatabase.getInstance().getReference("users/cadastros/clientes/$userId")
+
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
+
+            override fun onDataChange(p0: DataSnapshot) {
+                val user = p0.getValue(Usuário::class.java)
+
+                try {
+                    if (user != null) {
+                        reserva_Cliente_Nome = user.cliente_Nome
+                        reserva_Cliente_Sobrenome = user.cliente_Sobrenome
+                        reserva_Cliente_Pontos = user.cliente_Pontos
+                    }
+                } catch (ex: Exception) {
+                    Toast.makeText(this@ClientePratoComposicao, "${ex.message}", Toast.LENGTH_SHORT).show()
+                    composition_ProgressBar.visibility = View.GONE
+                }
+            }
+        })
     }
 
     private fun doReserva(prato: Pratos) {
@@ -86,13 +114,32 @@ class ClientePratoComposicao : AppCompatActivity() {
 
     private fun reservar(prato: Pratos, mAlertDialog: AlertDialog, mDialog: View) {
         val reserva_Id = UUID.randomUUID().toString()
-        val reserva_Hora = ""
-        val reserva_Cliente_Nome = ""
-        val reserva_Cliente_Sobrenome = ""
-        val reserva_Cliente_Alteracao = ""
-        val reserva_Cliente_Pontos = ""
+        val reserva_Hora = reserva_popup_hora_Data.text.toString()
+        val reserva_Cliente_Alteracao = reserva_popup_alteracoes.text.toString()
         val reserva_Prato_Nome = prato.pratoNome
         val reserva_Prato_Preco = prato.pratoPreco
+
+        val ref = FirebaseDatabase.getInstance().getReference("/reservas/restaurante/$reserva_Id")
+        val refHistorico =FirebaseDatabase.getInstance().getReference("/reservas/historico/$userId/$reserva_Id")
+
+        var reserva = Reservas(
+            reserva_Id,
+            reserva_Hora,
+            reserva_Cliente_Nome,
+            reserva_Cliente_Sobrenome,
+            reserva_Cliente_Alteracao,
+            reserva_Cliente_Pontos,
+            reserva_Prato_Nome,
+            reserva_Prato_Preco
+        )
+
+        ref.setValue(reserva).addOnSuccessListener {
+            Log.d("CadastroTESTE", "Finalmente deu boa")
+            Toast.makeText(geta)
+        }.addOnFailureListener {
+            cadastro_ProgressBar.visibility = View.GONE
+            Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
+        }
 
         mAlertDialog.dismiss()
         mDialog.reserva_popup_ProgressBar.visibility = View.GONE

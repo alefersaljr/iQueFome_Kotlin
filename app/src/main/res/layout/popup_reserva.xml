@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="360sp"
-                android:layout_height="400sp"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="360sp" android:layout_height="400sp"
                 android:layout_gravity="center"
                 android:background="@android:color/white">
 
@@ -52,17 +52,46 @@
             android:layout_centerVertical="true"
             android:layout_margin="5sp">
 
-        <TextView
-                android:id="@+id/reserva_popup_TextView_ParaRecuperar"
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/reserva_popup_hora_Field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10sp"
-                android:layout_marginEnd="10sp"
-                android:gravity="center"
-                android:text="Olá, sou ... e gostaria de reservar o prato ... Obrigado."
-                android:ellipsize="end"
-                android:textSize="18sp"
-                android:textColor="@color/text_color"/>
+                app:errorEnabled="true"
+                app:counterEnabled="true"
+                app:counterMaxLength="5">
+
+            <EditText
+                    android:id="@+id/reserva_popup_hora_Data"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10sp"
+                    android:layout_marginEnd="10sp"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    android:hint="Hora (separe hora e minuto com ponto)"
+                    android:ellipsize="end"
+                    android:textSize="18sp"
+                    android:textColor="@color/text_color"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Deseja retirar algum ingrediente?"
+                android:textColor="@color/text_color"
+                android:textStyle="bold"
+                android:textSize="15dp"/>
+
+        <EditText
+                android:id="@+id/reserva_popup_alteracoes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                android:gravity="start"
+                android:hint="Preencha suas alterações aqui"
+                android:background="@drawable/round_button"
+                android:ellipsize="end"/>
 
     </LinearLayout>
 
