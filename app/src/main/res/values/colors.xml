@@ -17,4 +17,6 @@
 
     <color name="text_color_light">#816E54</color>
     <color name="text_color_dark">#2b1c00</color>
+
+    <color name="icon_color">#99FFFFFF</color>
 </resources>

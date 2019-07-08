@@ -4,25 +4,25 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import br.com.alexandre_salgueirinho.iquefome_kotlin.R
 import br.com.alexandre_salgueirinho.iquefome_kotlin.model.Pratos
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_cliente_prato_composicao.*
+import kotlinx.android.synthetic.main.popup_reserva.view.*
+import java.util.*
 
 class ClientePratoComposicao : AppCompatActivity() {
 
     private lateinit var mToolbar: androidx.appcompat.widget.Toolbar
-    val idBackButton = 16908332
+    var isFavorito = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +35,10 @@ class ClientePratoComposicao : AppCompatActivity() {
         val prato = intent.getParcelableExtra<Pratos>(ClienteInicial.PRATO_KEY)
 
         getPrato(prato.pratoId)
+
+        getClienteData()
+
+        favoritar()
 
         val handler = Handler()
         handler.postDelayed(object : Runnable {
@@ -52,15 +56,62 @@ class ClientePratoComposicao : AppCompatActivity() {
         }
 
         composition_Button_Adicionar.setOnClickListener {
-//            Toast.makeText(this, "Carrinho em desenvolvimento, aguarde", Toast.LENGTH_SHORT).show()
-            startActivity(
-                Intent(this, ClienteCarrinho::class.java)
-            )
+            //            Toast.makeText(this, "Carrinho em desenvolvimento, aguarde", Toast.LENGTH_SHORT).show()
+//            startActivity(
+//                Intent(this, ClienteCarrinho::class.java)
+//            )
+            doReserva(prato)
+        }
+    }
+
+    private fun getClienteData() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    private fun doReserva(prato: Pratos) {
+        val mDialog = LayoutInflater.from(this).inflate(R.layout.popup_reserva, null)
+        val mBuilder = AlertDialog.Builder(this).setView(mDialog)
+        val mAlertDialog = mBuilder.show()
+
+        mDialog.reserva_popup_Button_Enviar.setOnClickListener {
+            mDialog.reserva_popup_ProgressBar.visibility = View.VISIBLE
+
+            reservar(prato, mAlertDialog, mDialog)
+        }
+
+        mDialog.reserva_popup_Button_Close.setOnClickListener {
+            mAlertDialog.dismiss()
+        }
+    }
+
+    private fun reservar(prato: Pratos, mAlertDialog: AlertDialog, mDialog: View) {
+        val reserva_Id = UUID.randomUUID().toString()
+        val reserva_Hora = ""
+        val reserva_Cliente_Nome = ""
+        val reserva_Cliente_Sobrenome = ""
+        val reserva_Cliente_Alteracao = ""
+        val reserva_Cliente_Pontos = ""
+        val reserva_Prato_Nome = prato.pratoNome
+        val reserva_Prato_Preco = prato.pratoPreco
+
+        mAlertDialog.dismiss()
+        mDialog.reserva_popup_ProgressBar.visibility = View.GONE
+    }
+
+    private fun favoritar() {
+        float_button_favorito.setOnClickListener {
+            isFavorito = !isFavorito
+            if (isFavorito) {
+                float_button_favorito.setImageResource(R.drawable.icon_star_on)
+            } else if (!isFavorito) {
+                float_button_favorito.setImageResource(R.drawable.icon_star_off)
+            }
+            Toast.makeText(this@ClientePratoComposicao, "$isFavorito", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun sharePrato(prato: Pratos) {
-        val intent = Intent ()
+        val intent = Intent()
         val message = "Olá, experimentei o prato '${prato.pratoNome}' e gostei bastante. Recomendo"
 
         intent.action = Intent.ACTION_SEND
@@ -72,10 +123,10 @@ class ClientePratoComposicao : AppCompatActivity() {
 
     private fun getPrato(pratoID: String) {
 
-        val ref = FirebaseDatabase.getInstance().getReference("/pratos/$pratoID")
+        val ref = FirebaseDatabase.getInstance().getReference("/pratos/clientes/$pratoID")
 
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) { }
+            override fun onCancelled(p0: DatabaseError) {}
 
             override fun onDataChange(p0: DataSnapshot) {
                 val prato = p0.getValue(Pratos::class.java)
@@ -88,7 +139,6 @@ class ClientePratoComposicao : AppCompatActivity() {
                         composition_Restaurante_Nome.text = prato.pratoRestaurante
                         composition_Prato_Descricao_Data.text = prato.pratoDescricao
                         composition_Prato_Preco.text = preco
-//                        textViewIndicado_Data.text = prato.
 
                         Picasso.get().load(prato.pratoUrlFoto).into(composition_Prato_Foto)
 
@@ -100,7 +150,8 @@ class ClientePratoComposicao : AppCompatActivity() {
                         }, 2000)
 
                     } else {
-                        Toast.makeText(this@ClientePratoComposicao, "Por favor, realize o login", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@ClientePratoComposicao, "Por favor, realize o login", Toast.LENGTH_SHORT)
+                            .show()
                         composition_ProgressBar.visibility = View.GONE
                     }
                 } catch (ex: Exception) {
@@ -109,20 +160,5 @@ class ClientePratoComposicao : AppCompatActivity() {
                 }
             }
         })
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.action_menu_shop, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            idBackButton -> onBackPressed()
-            R.id.action_menu_icon_shop -> {
-                Toast.makeText(this, "Carrinho em desenvolvimento, aguarde", Toast.LENGTH_SHORT).show()
-            }
-        }
-        return true
     }
 }

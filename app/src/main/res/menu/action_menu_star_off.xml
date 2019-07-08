@@ -4,9 +4,9 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-            android:id="@+id/action_menu_icon_shop"
-            android:title="Meu Carrinho"
-            android:icon="@drawable/icon_shopping"
+            android:id="@+id/action_menu_icon_star_off"
+            android:title="Favoritar"
+            android:icon="@drawable/icon_star_off"
             app:showAsAction="always"/>
 
 </menu>

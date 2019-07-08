@@ -12,15 +12,34 @@ import android.widget.Toast
 import br.com.alexandre_salgueirinho.iquefome_kotlin.R
 import br.com.alexandre_salgueirinho.iquefome_kotlin.model.Usuário
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_cliente_cadastro.*
+import java.lang.Exception
 import java.util.*
 
 class ClienteCadastro : AppCompatActivity() {
 
     private lateinit var mToolbar: androidx.appcompat.widget.Toolbar
     var uriImagemSelecionada: Uri? = null
+
+    //#region User Indicante
+    lateinit var indicante_Obj: Usuário
+
+    var indicante_Id = ""
+    var indicante_Nome = ""
+    var indicante_Sobrenome = ""
+    var indicante_Email = ""
+    var indicante_Password = ""
+    var indicante_Celular = ""
+    var indicante_Indicado = ""
+    var indicante_UrlImagemPerfil = ""
+    var indicante_Pontos = ""
+
+    //endregion
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,10 +85,12 @@ class ClienteCadastro : AppCompatActivity() {
             val password = cadastro_EditText_Password.text.toString()
 
             if (validaCampos(email, password)) {
-//            if (!PhoneNumberUtils.isGlobalPhoneNumber(Cliente_Celular) || !Patterns.PHONE.matcher(Cliente_Celular).matches()) {
+                if (indicante_Id.isNotEmpty())
+                    verificaUserIndicado()
+//            if (!PhoneNumberUtils.isGlobalPhoneNumber(cliente_Celular) || !Patterns.PHONE.matcher(cliente_Celular).matches()) {
 //                Toast.makeText(
 //                    this,
-//                    "É necessário informar um Cliente_Celular certo",
+//                    "É necessário informar um cliente_Celular certo",
 //                    Toast.LENGTH_SHORT
 //                ).show()
 
@@ -85,7 +106,7 @@ class ClienteCadastro : AppCompatActivity() {
                             return@addOnCompleteListener
                         }
 
-                        Log.d("ClienteCadastroActivity", "Usuário criado, Cliente_Id: ${it.result!!.user.uid}")
+                        Log.d("ClienteCadastroActivity", "Usuário criado, cliente_Id: ${it.result!!.user.uid}")
 
                         uploadImage()
 
@@ -105,6 +126,7 @@ class ClienteCadastro : AppCompatActivity() {
         val nome = cadastro_EditText_Nome.text.toString()
         val sobrenome = cadastro_EditText_Sobrenome.text.toString()
         val celular = cadastro_EditText_Celular.text.toString()
+        indicante_Id = cadastro_EditText_Indicado.text.toString()
 
         if (sobrenome.isEmpty() || nome.isEmpty() || email.isEmpty() || password.isEmpty() || uriImagemSelecionada == null) {
 
@@ -143,11 +165,42 @@ class ClienteCadastro : AppCompatActivity() {
                     cadastro_EditText_Celular.requestFocus()
                     cadastro_Textfild_Celular.error = "É necessário informar um Celular"
                 }
-
             }
             return false
         }
         return true
+    }
+
+    private fun verificaUserIndicado() {
+        val refIndicado = FirebaseDatabase.getInstance().getReference("/users/cadastros/clientes/$indicante_Id")
+
+        refIndicado.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
+
+            override fun onDataChange(p0: DataSnapshot) {
+                try {
+                    val userIndicado = p0.getValue(Usuário::class.java)
+
+                    if (userIndicado != null) {
+                        Log.d("CadastroTESTE", "User Indicação - ${userIndicado.cliente_Nome}")
+
+                        indicante_Obj = userIndicado
+
+                        indicante_Nome = userIndicado.cliente_Nome
+                        indicante_Sobrenome = userIndicado.cliente_Sobrenome
+                        indicante_Email = userIndicado.cliente_Email
+                        indicante_Password = userIndicado.cliente_Password
+                        indicante_Celular = userIndicado.cliente_Celular
+                        indicante_Indicado = userIndicado.cliente_Indicado
+                        indicante_UrlImagemPerfil = userIndicado.cliente_UrlImagemPerfil
+                        indicante_Pontos = userIndicado.cliente_Pontos
+                    }
+                } catch (ex: Exception) {
+                    Toast.makeText(this@ClienteCadastro, "Erro. ${ex.message}", Toast.LENGTH_SHORT).show()
+                    return
+                }
+            }
+        })
     }
 
     private fun uploadImage() {
@@ -181,17 +234,67 @@ class ClienteCadastro : AppCompatActivity() {
             cadastro_EditText_Email.text.toString(),
             cadastro_EditText_Password.text.toString(),
             cadastro_EditText_Celular.text.toString(),
-            cadastro_EditText_Indicado.text.toString(),
-            urlImagemPerfil
+            indicante_Id,
+            urlImagemPerfil,
+            "0"
         )
 
         ref.setValue(user).addOnSuccessListener {
-            Log.d("ClienteCadastroActivity", "Finalmente deu boa")
-            finish()
-            cadastro_ProgressBar.visibility = View.GONE
+            Log.d("CadastroTESTE", "Finalmente deu boa")
+            if (indicante_Id.isNotEmpty()) {
+                updateIndicante()
+            } else {
+                finish()
+                cadastro_ProgressBar.visibility = View.GONE
+            }
         }.addOnFailureListener {
             cadastro_ProgressBar.visibility = View.GONE
             Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun updateIndicante() {
+
+        Log.d("CadastroTESTE", "passou pelo update do user indicante")
+
+        try {
+            var pontosDoIndicante = indicante_Obj.cliente_Pontos.toIntOrNull()
+            if (pontosDoIndicante != null) {
+                pontosDoIndicante += 1
+                indicante_Pontos = pontosDoIndicante.toString()
+
+                Log.d("CadastroTESTE", "user indicante - pontos $indicante_Pontos")
+
+                var userInd = Usuário(
+                    indicante_Id,
+                    indicante_Nome,
+                    indicante_Sobrenome,
+                    indicante_Email,
+                    indicante_Password,
+                    indicante_Celular,
+                    indicante_Indicado,
+                    indicante_UrlImagemPerfil,
+                    indicante_Pontos
+                )
+
+                val refIndicado = FirebaseDatabase.getInstance().getReference("/users/cadastros/clientes/$indicante_Id")
+
+                refIndicado.setValue(userInd).addOnSuccessListener {
+                    Log.d("CadastroTESTE", "atualizado o indicante")
+                    finish()
+                    cadastro_ProgressBar.visibility = View.GONE
+                }.addOnFailureListener {
+                    cadastro_ProgressBar.visibility = View.GONE
+                    Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
+                }
+
+            } else
+                Toast.makeText(this, "Erro - pontosIndicante é nulo", Toast.LENGTH_SHORT).show()
+
+
+        } catch (ex: Exception) {
+            Log.d("CadastroTESTE", "user indicante - catch")
+            Toast.makeText(this, "Erro - ${ex.message}", Toast.LENGTH_SHORT).show()
         }
     }
 

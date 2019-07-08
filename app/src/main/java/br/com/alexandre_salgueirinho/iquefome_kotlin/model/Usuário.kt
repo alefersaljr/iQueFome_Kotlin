@@ -1,14 +1,14 @@
 package br.com.alexandre_salgueirinho.iquefome_kotlin.model
 
 class Usuário(
-    val Cliente_Id: String,
-    val Cliente_Nome: String,
-    val Cliente_Sobrenome: String,
-    val Cliente_Email: String,
-    val Cliente_Password: String,
-    val Cliente_Celular: String,
-    val Cliente_Indicado: String,
-    val Cliente_UrlImagemPerfil: String,
+    val cliente_Id: String,
+    val cliente_Nome: String,
+    val cliente_Sobrenome: String,
+    val cliente_Email: String,
+    val cliente_Password: String,
+    val cliente_Celular: String,
+    val cliente_Indicado: String,
+    val cliente_UrlImagemPerfil: String,
     val cliente_Pontos: String
 ) {
     constructor() : this("", "", "", "", "", "", "", "", "")

@@ -1,17 +1,22 @@
 package br.com.alexandre_salgueirinho.iquefome_kotlin.view
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import br.com.alexandre_salgueirinho.iquefome_kotlin.R
 //import br.com.alexandre_salgueirinho.iquefome_kotlin.model.PratoItem
 import br.com.alexandre_salgueirinho.iquefome_kotlin.model.Pratos
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -27,6 +32,12 @@ import kotlinx.android.synthetic.main.item_prato.view.*
 class ClienteInicial : AppCompatActivity() {
 
     private lateinit var mToolbar: androidx.appcompat.widget.Toolbar
+    lateinit var anim_open: Animation
+    lateinit var anim_close: Animation
+    lateinit var anim_rotate: Animation
+    lateinit var anim_antirotate: Animation
+    var isOpen: Boolean = false
+    var isFavorito: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +45,9 @@ class ClienteInicial : AppCompatActivity() {
 
         mToolbar = findViewById(R.id.menu_Toolbar)
         setSupportActionBar(mToolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        inicializaFloatingMenu()
 
         carregaPratos()
 
@@ -44,15 +58,63 @@ class ClienteInicial : AppCompatActivity() {
             }
         }, 4000)
 
-        composition_Refresh.setOnClickListener {
-            Toast.makeText(this, "Atualizando Pratos", Toast.LENGTH_SHORT).show()
-            inicial_ProgressBar.visibility = View.VISIBLE
-            carregaPratos()
-            inicial_ProgressBar.visibility = View.GONE
+        inicial_Refresh.setOnRefreshListener {
+            Toast.makeText(this, "Atualizando Lista de Pratos", Toast.LENGTH_SHORT).show()
+            Handler(Looper.getMainLooper()).postDelayed({
+                carregaPratos()
+                inicial_RecyclerView.adapter?.notifyDataSetChanged()
+                inicial_Refresh.isRefreshing = false
+                Toast.makeText(this, "Lista de Pratos Atualizada", Toast.LENGTH_SHORT).show()
+            }, 3000)
         }
     }
 
-    companion object{
+    @SuppressLint("RestrictedApi")
+    private fun inicializaFloatingMenu() {
+        anim_open = AnimationUtils.loadAnimation(applicationContext, R.anim.open_menu)
+        anim_close = AnimationUtils.loadAnimation(applicationContext, R.anim.close_menu)
+        anim_rotate = AnimationUtils.loadAnimation(applicationContext, R.anim.rotate_menu)
+        anim_antirotate = AnimationUtils.loadAnimation(applicationContext, R.anim.anti_rotate_menu)
+
+        floating_Filter_Menu.setOnClickListener {
+            if (isOpen) {
+                floating_Filter_Menu.setImageResource(R.drawable.icon_filter)
+                floating_Filter_Menu.startAnimation(anim_antirotate)
+                floating_Filter_one.startAnimation(anim_close)
+                floating_Filter_two.startAnimation(anim_close)
+                floating_Filter_one.visibility = View.GONE
+                floating_Filter_two.visibility = View.GONE
+                isOpen = false
+            } else {
+                floating_Filter_Menu.startAnimation(anim_rotate)
+                floating_Filter_one.startAnimation(anim_open)
+                floating_Filter_two.startAnimation(anim_open)
+                floating_Filter_one.visibility = View.VISIBLE
+                floating_Filter_two.visibility = View.VISIBLE
+                floating_Filter_one.isClickable = true
+                floating_Filter_two.isClickable = true
+                isOpen = true
+                floating_Filter_Menu.setImageResource(R.drawable.icon_close)
+            }
+        }
+
+        floating_Filter_one.setOnClickListener {
+            isFavorito = !isFavorito
+            if (isFavorito) {
+                floating_Filter_one.setImageResource(R.drawable.icon_star_on)
+            }else if (!isFavorito){
+                floating_Filter_one.setImageResource(R.drawable.icon_star_off)
+            }
+            Toast.makeText(this@ClienteInicial, "$isFavorito", Toast.LENGTH_SHORT).show()
+        }
+
+        floating_Filter_two.setOnClickListener {
+            Toast.makeText(this@ClienteInicial, "Clicou no segundo", Toast.LENGTH_SHORT).show()
+        }
+
+    }
+
+    companion object {
         val PRATO_KEY = "PRATO_KEY"
     }
 
@@ -86,6 +148,7 @@ class ClienteInicial : AppCompatActivity() {
                 }
                 inicial_RecyclerView.adapter = adapter
             }
+
             override fun onCancelled(p0: DatabaseError) {}
         })
     }
@@ -114,9 +177,14 @@ class ClienteInicial : AppCompatActivity() {
         }
         return true
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
 }
 
-class PratoItem (val prato:Pratos): Item<ViewHolder>() {
+class PratoItem(val prato: Pratos) : Item<ViewHolder>() {
 
     override fun bind(viewHolder: ViewHolder, position: Int) {
         val precoPrato = "R\$ " + prato.pratoPreco

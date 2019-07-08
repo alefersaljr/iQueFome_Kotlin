@@ -52,13 +52,14 @@ class ClienteProfile : AppCompatActivity() {
 
                 try {
                     if (user != null) {
-                        textViewNome.text = user.Cliente_Nome
-                        textViewSobrenome.text = user.Cliente_Sobrenome
-                        textViewCelular_Data.text = user.Cliente_Celular
-                        textViewEmail_Data.text = user.Cliente_Email
-                        textViewIndicado_Data.text = user.Cliente_Indicado
+                        textViewNome.text = user.cliente_Nome
+                        textViewSobrenome.text = user.cliente_Sobrenome
+                        textViewCelular_Data.text = user.cliente_Celular
+                        textViewEmail_Data.text = user.cliente_Email
+                        textViewIndicado_Data.text = user.cliente_Indicado
+                        meus_dados_pontuscao_Data.text = user.cliente_Pontos
 
-                        Picasso.get().load(user.Cliente_UrlImagemPerfil).into(perfil_image)
+                        Picasso.get().load(user.cliente_UrlImagemPerfil).into(perfil_image)
 
                         val handler = Handler()
                         handler.postDelayed(object : Runnable {
